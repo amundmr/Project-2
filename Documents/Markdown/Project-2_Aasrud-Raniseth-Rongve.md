@@ -14,3 +14,5 @@ header-includes: |
   \rfoot{\thepage}
 ---
 
+# Project 1 a)
+$$(\mathbf{Uv}_j)^T\mathbf{Uv}_i=\mathbf{v}_j^T\mathbf{U}^T\mathbf{Uv}_i=\mathbf{v}_j^T\mathbb{I}\mathbf{v}_i=\mathbf{v}_j\mathbf{v}_i$$
