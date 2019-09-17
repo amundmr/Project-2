@@ -35,3 +35,7 @@ $$\\
 $$(\mathbf{Uv}_j)^T\mathbf{Uv}_i=\mathbf{v}_j^T\mathbf{U}^T\mathbf{Uv}_i=\mathbf{v}_j^T\mathbb{I}\mathbf{v}_i=\mathbf{v}_j\mathbf{v}_i
 \\$$
 --
+
+
+
+kilde til oppgave 2 a): http://www.math.harvard.edu/archive/21b_spring_08/handouts/orthomatrix.pdf
