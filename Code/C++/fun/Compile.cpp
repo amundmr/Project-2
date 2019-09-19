@@ -22,7 +22,7 @@ void simpleCompile(string inFile) {
 
 void compile(string outFile, string inFile) {
   // Concatenating input strings to commands
-  string compileCommand = "c++ -o " + outFile + " " + inFile + " -DARMA_DONT_USE_WRAPPER -lopenblas -llapack"; // add -DARMA_DONT_USE_WRAPPER -lopenblas -llapack for armadillo
+  string compileCommand = "c++ -o " + outFile + " " + inFile + "-std=c++11 -DARMA_DONT_USE_WRAPPER -larmadillo -lopenblas -llapack"; // add -DARMA_DONT_USE_WRAPPER -lopenblas -llapack for armadillo
   string runCommand = "./" + outFile;
 
   // Make system compile and run file
