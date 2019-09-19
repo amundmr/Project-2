@@ -1,6 +1,8 @@
 #include <iostream>
+#include <armadillo>
+#include <mutex>
 
 int main() {
-  std::cout << "helooooo wourld" << std::endl;
-  return 0;
+  std::cout << "helooooo wourld";
+  
 }
