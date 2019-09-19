@@ -7,15 +7,8 @@ using namespace std;
 using namespace arma;
 
 
-mat diagonalize(mat A){
-  vec eigVal;
-  mat eigVec;
-  //Finding the eigenvalues
-  eig_sym(eigVal, eigVec, A);
-  //Creating diagonal matrix
-  mat diagonalized = diagmat(eigVal);
-  return diagonalized;
-}
+mat diagonalize(mat A);
+//mat jacobi(mat A);
 
 int main(){
   //constants
@@ -37,6 +30,6 @@ int main(){
 
   for (int i = 0;i < N;i++){
     int lambda = d + 2 * a * cos (i * M_PI /(N + 1));
-    cout <<lambda << endl;
+    cout << lambda << endl;
   }
 }
