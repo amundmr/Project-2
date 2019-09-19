@@ -9,7 +9,7 @@
 using namespace std;
 using namespace arma;
 
-void diagonalize(mat A){
+mat diagonalize(mat A){
   vec eigVal;
   mat eigVec;
   //Finding the eigenvalues
