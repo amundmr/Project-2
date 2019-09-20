@@ -1,10 +1,13 @@
-// #include <armadillo>
-// #include <iostream>
-// #include <cmath>
+#include <armadillo>
+#include <iostream>
+#include <cmath>
 
 
-// using namespace std;
-// using namespace arma;
+using namespace std;
+using namespace arma;
 
 
-// void Jacobi()
+main(){
+
+
+}
