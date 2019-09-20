@@ -7,15 +7,7 @@ using namespace std;
 using namespace arma;
 
 
-mat diagonalize(mat A){
-  vec eigVal;
-  mat eigVec;
-  //Finding the eigenvalues
-  eig_sym(eigVal, eigVec, A);
-  //Creating diagonal matrix
-  mat diagonalized = diagmat(eigVal);
-  return diagonalized;
-}
+mat diagonalize(mat A);
 
 int main(){
   //constants
