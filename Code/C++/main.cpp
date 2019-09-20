@@ -33,3 +33,5 @@ int main(){
     cout << lambda << endl;
   }
 }
+
+// g++ *.cpp  -larmadillo -llapack -lblas -o unit
