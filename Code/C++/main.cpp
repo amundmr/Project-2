@@ -7,8 +7,8 @@ using namespace std;
 using namespace arma;
 
 
-mat diagonalize(mat A);
-//mat jacobi(mat A);
+mat diagonalizer(mat A);
+mat Jacobi_method(mat A, int n);
 
 int main(){
   //constants
@@ -25,7 +25,7 @@ int main(){
   A.diag(-1) += a;
 
   mat B;
-  B =  diagonalize(A);
+  B = diagonalizer(A);
   cout<<B<<endl;
 
   for (int i = 0;i < N;i++){
