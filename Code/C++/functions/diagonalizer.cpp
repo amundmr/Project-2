@@ -10,9 +10,10 @@ using namespace std;
 using namespace arma;
 
 mat diagonalizer(mat A){
+  //Defining vectors and matrix to hold the values
   vec eigVal;
   mat eigVec;
-  //Finding the eigenvalues
+  //Finding the eigenvalues, and eigenvectors
   eig_sym(eigVal, eigVec, A);
   //Creating diagonal matrix
   mat diagonalized = diagmat(eigVal);

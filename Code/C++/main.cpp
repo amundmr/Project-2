@@ -1,7 +1,12 @@
+// g++ *.cpp  -larmadillo -llapack -lblas -o unit
+
 #include <armadillo>
 #include <iostream>
 #include <cmath>
-
+#include "functions/diagonalizer.cpp"
+#include "functions/Jacobi_method.cpp"
+#include "functions/Jacobi_rotate.cpp"
+#include "functions/off.cpp"
 
 using namespace std;
 using namespace arma;
@@ -11,19 +16,21 @@ mat diagonalizer(mat A);
 mat Jacobi_method(mat A, int n);
 
 int main(){
-  //constants
-  double h = 0.1;
-  int N = 10;
-  double d = 2 / (h * h);
-  double a = -1 / (h * h);
+  //Constants
+  double Rstart = 0.0; double Rfin = 1.0; //Start and stop values
+  int N = 10;                             //Number of iterations or points
+  double h = (Rfin-Rstart)/N;             //Spacing
+  double d = 2 / (h * h);                 //Diagonal element
+  double a = -1 / (h * h);                //Nondiagonal element
 
-//setting up matrix A.
-  mat A = mat(N,N);
-  //changing the diagonal + non diagnonal(above/below diag) elements
+  //Setting up matrix A.
+  mat A = mat(N,N, fill::zeros);
+
+  //Changing the diagonal + non diagnonal(above/below diag) elements
   A.diag()   += d;
   A.diag(1)  += a;
   A.diag(-1) += a;
-
+  //Defining matrix B to have eigenvalues of A on its diagonal
   mat B;
   B = diagonalizer(A);
   cout<<B<<endl;
@@ -33,5 +40,3 @@ int main(){
     cout << lambda << endl;
   }
 }
-
-// g++ *.cpp  -larmadillo -llapack -lblas -o unit
