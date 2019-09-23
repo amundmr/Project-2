@@ -11,7 +11,7 @@
 using namespace std;
 using namespace arma;
 
-mat diagonalizer(mat A);
+//mat diagonalizer(mat A);
 mat Jacobi_method(mat A, int N);
 
 int main(){
@@ -29,15 +29,14 @@ int main(){
   A.diag()   += d;
   A.diag(1)  += a;
   A.diag(-1) += a;
-  //Defining matrix B to have eigenvalues of A on its diagonal
-  mat B;
-  mat C;
-  //B = diagonalizer(A);
-  C = Jacobi_method(C,N);
-  cout<<C<<endl;
+
+  //Defining matrix C to have eigenvalues of A on its diagonal, by using Jacobi's method
+  //mat B = diagonalizer(A);
+  mat C = Jacobi_method(A,N);
+  cout << "this is C:" << C << endl;
 
   for (int i = 0;i < N;i++){
     int lambda = d + 2 * a * cos (i * M_PI /(N + 1));
-    cout << lambda << endl;
+    //cout << lambda << endl;
   }
 }
