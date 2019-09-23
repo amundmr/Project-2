@@ -13,7 +13,7 @@ mat Jacobi_method(mat A, int N){
     double epsilon = 1.0e-8;                          //Defining maximum deviation from 0 for the off diagonal elements
     int max_iterations = 1e3;                         //Setting a number of max iterations if the tolerance epsilon is not yet met
     int i = 0;
-    double max = epsilon * 2;                                 //Introducing variable for storing max off-diagonal value
+    double max = epsilon * 2;                         //Introducing variable for storing max off-diagonal value
     mat B;
     int k = 0; int l = 0;
     while (max > epsilon && i <= max_iterations){     //Run this loop until max deviation is less than eps or max iterations is met
