@@ -12,7 +12,7 @@ void Jacobi_rotate(mat A, mat B, int k, int l, int N){
     if (A(k,l) != 0.0){                                 //If A(k,l) is 0, don't rotate
         double tan;
         double tau;
-        double t;
+        double t;                                         //t = cot2theta
         tau = (A(l,l)-A(k,k))/(2.0*A(k,l));
         if (tau >= 0){
             tan = 1.0/(tau + sqrt(1.0+pow(tau,2)));

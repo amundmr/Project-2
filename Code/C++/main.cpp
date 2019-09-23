@@ -17,8 +17,8 @@ mat Jacobi_method(mat A, int N);
 int main(){
   //Constants
   double Rstart = 0.0; double Rfin = 1.0; //Start and stop values
-  int N = 10;                             //Number of iterations or points
-  double h = (Rfin-Rstart)/N;             //Spacing
+  int N = 10;                             //Number of iterations(integrationpoints)
+  double h = (Rfin-Rstart)/N;             //Spacing/stepsize
   double d = 2 / (h * h);                 //Diagonal element
   double a = -1 / (h * h);                //Nondiagonal element
 
