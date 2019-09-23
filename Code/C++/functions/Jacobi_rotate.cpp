@@ -5,7 +5,7 @@
 using namespace std;
 using namespace arma;
 
-void Jacobi_rotate(mat A, mat B, int k, int l, int N){
+mat Jacobi_rotate(mat A, mat B, int k, int l, int N){
     double sin;
     double cos;
 
