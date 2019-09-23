@@ -16,7 +16,7 @@ mat Jacobi_method(mat A, int N){
     int k = 0; int l = 0;
     while (max > epsilon && i <= max_iterations){     //Run this loop until max deviation is less than eps or max iterations is met
         B = A;
-        off(A, N, max, k, l);                         //Finding the maximum value and returning its indices k, l
+        off(A, N, &max, &k, &l);                      //Finding the maximum value and returning its indices k, l
         cout << k << " | " << l << endl;
         Jacobi_rotate(A,B,k,l,N);                     //Rotating by means of k, l. B is the rotated matrix.
         A = B;                                        //Setting A=B ready for new loop iteration

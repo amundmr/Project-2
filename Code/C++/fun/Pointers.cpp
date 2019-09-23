@@ -10,6 +10,7 @@ int main(){
   int k = 2;
   cout << "this is k: " << k << endl;
   cout << "this is &k: " << &k << endl;
+
   //cout << "this is kPtr: " << kPtr << endl;
   //cout << "this is *kPtr: " << *kPtr << endl;
   return 0;
