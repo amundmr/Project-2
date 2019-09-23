@@ -3,10 +3,10 @@
 #include <armadillo>
 #include <iostream>
 #include <cmath>
-#include "functions/diagonalizer.cpp"
-#include "functions/Jacobi_method.cpp"
-#include "functions/Jacobi_rotate.cpp"
-#include "functions/off.cpp"
+// #include "functions/diagonalizer.cpp"
+// #include "functions/Jacobi_method.cpp"
+// #include "functions/Jacobi_rotate.cpp"
+// #include "functions/off.cpp"
 
 using namespace std;
 using namespace arma;
@@ -35,7 +35,7 @@ int main(){
   mat C = Jacobi_method(A,N);
   cout << "this is C:" << C << endl;
 
-  for (int i = 0;i < N;i++){
+  for (int i = 0;i < N-1;i++){
     int lambda = d + 2 * a * cos (i * M_PI /(N + 1));
     //cout << lambda << endl;
   }
