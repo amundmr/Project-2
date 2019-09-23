@@ -1,5 +1,5 @@
 CC = g++ # compiler of choice
-CCFLAGS = -larmadillo -llapack -lblas -std=c++14 # flags
+CCFLAGS = -larmadillo -llapack -lblas -std=c++11 # flags
 
 main.exe: obj # target is to produce main.exe, but depends on obj function defined below.
 	g++ main.cpp $(wildcard obj/*.o) $(CCFLAGS) -o main.exe

@@ -1,7 +1,7 @@
 #include <armadillo>
 #include <iostream>
 #include <cmath>
-#include <tuple>
+//#include <tuple>
 
 using namespace std;
 using namespace arma;
