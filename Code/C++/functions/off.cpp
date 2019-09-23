@@ -11,11 +11,11 @@ int off(mat A, int N, double max){
    for (int i = 0; i < N; ++i){
        for ( int j = i+1; j < N; ++j){
            double aij = fabs(A(i,j));
-           if ( aij > max){ 
+           if ( aij > max){
               max = aij;  k = i; l = j;
               // storing the maximum value and returning its indices.
            }
        }
    }
-   return k, l;
+   return k, l, max;
 }
