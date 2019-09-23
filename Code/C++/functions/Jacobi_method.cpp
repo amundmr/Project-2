@@ -1,11 +1,12 @@
 #include <armadillo>
 #include <iostream>
 #include <cmath>
-#include "funcs.h"
 
 using namespace std;
 using namespace arma;
 
+void Jacobi_rotate(mat A, mat B, int k, int l, int N);
+void off(mat A, int N, double* max, int* k, int* l);
 
 mat Jacobi_method(mat A, int N){
     double epsilon = 1.0e-8;                          //Defining maximum deviation from 0 for the off diagonal elements
