@@ -36,7 +36,7 @@ void Jacobi_rotate(mat A, mat B, int k, int l, int N){
     B(l,k) = 0.0;
 
     //Rotating all off-diagonal elements from A into B
-    for (int i=0; i<n; i++){
+    for (int i=0; i<N; i++){
         if (i != k && i != 1){
             B(i,k) = cos*A(i,k) - sin*A(i,l);
             B(k,i) = B(i,k);
