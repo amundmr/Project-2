@@ -1,16 +1,21 @@
-int off(mat A, int n, double max_off){
-   double max;
-   double sum = 0.0;
+#include <armadillo>
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+using namespace arma;
+
+int off(mat A, int N, double max){
    int k; int l;
-   for (int i = 0; i < n; ++i){
-       for ( int j = i+1; j < n; ++j){
+   // finding the maximum of the off-diagonal elements.
+   for (int i = 0; i < N; ++i){
+       for ( int j = i+1; j < N; ++j){
            double aij = fabs(A(i,j));
-           sum+=aij;
            if ( aij > max){ 
               max = aij;  k = i; l = j;
+              // storing the maximum value and returning its indices.
            }
        }
    }
-   max_off = sum;
    return k, l;
 }

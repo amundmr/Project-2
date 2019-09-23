@@ -1,10 +1,12 @@
 //Compile with: g++ matrixCreator.cpp -o matrixCreator -std=c++11 -larmadillo -lopenblas -llapack
 // run with matrix dimension as argument
-// #include <iostream>
-// #include <fstream>
-// #include <armadillo>
-// #include <cmath>
 // #include <cstdlib>
+#include <armadillo>
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+using namespace arma;
 
 using namespace std;
 using namespace arma;
