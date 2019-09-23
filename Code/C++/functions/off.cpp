@@ -1,7 +1,7 @@
 #include <armadillo>
 #include <iostream>
 #include <cmath>
-//#include <tuple>
+#include "funcs.h"
 
 using namespace std;
 using namespace arma;
@@ -13,7 +13,7 @@ void off(mat A, int N, double max, int k, int l){
 
           if ( i != j ){                        //If i != j we are above or below
             double aij = fabs( A(i,j) );        //Looking at the element in the matrix
-            
+
             if ( aij > max ){                   //If the element is greater than any previous element
               max = aij;  k = i; l = j;         //Then we want to store its index and its value
 

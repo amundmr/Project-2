@@ -3,10 +3,7 @@
 #include <armadillo>
 #include <iostream>
 #include <cmath>
-// #include "functions/diagonalizer.cpp"
-// #include "functions/Jacobi_method.cpp"
-// #include "functions/Jacobi_rotate.cpp"
-// #include "functions/off.cpp"
+#include "functions/funcs.h"
 
 using namespace std;
 using namespace arma;
