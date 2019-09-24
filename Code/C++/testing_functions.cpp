@@ -1,7 +1,5 @@
-
-
 #include "catch.hpp"
-#include "jacobi.h"
+#include "jacobi.h" //må få riktig navn her
 
 using namespace std;
 
