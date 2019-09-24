@@ -6,33 +6,22 @@
 
 using namespace std;
 using namespace arma;
-//hei
+
 mat diagonalizer(mat A);
 mat Jacobi_method(mat A, int N);
+tuple<mat,int> initialize();
 
 int main(){
-  //Constants
-  double Rstart = 0.0; double Rfin = 1.0; //Start and stop values
-  int N = 10;                             //Number of iterations(integrationpoints)
-  double h = (Rfin-Rstart)/N;             //Spacing/stepsize
-  double d = 2 / (h * h);                 //Diagonal element
-  double a = -1 / (h * h);                //Nondiagonal element
-
-  //Setting up matrix A.
-  mat A = mat(N,N, fill::zeros);
-
-  //Changing the diagonal + non diagnonal(above/below diag) elements
-  A.diag()   += d;
-  A.diag(1)  += a;
-  A.diag(-1) += a;
-
+  auto init_values = initialize();
+  mat A = get<0>(init_values);
+  int N =get<1>(init_values);
   cout << A << endl;
 
   //Defining matrix C to have eigenvalues of A on its diagonal, by using Jacobi's method
   mat C = mat(N,N, fill::zeros);
 
-  mat B = diagonalizer(A);
-  cout << "B diag:" << B << endl;
+  //mat B = diagonalizer(A);
+  //cout << "B diag:" << B << endl;
   C = Jacobi_method(A,N);
   cout << "this is C:" << C << endl;
   cout << "program ran" << endl;
