@@ -6,7 +6,7 @@
 
 using namespace std;
 using namespace arma;
-
+//hei
 mat diagonalizer(mat A);
 mat Jacobi_method(mat A, int N);
 
