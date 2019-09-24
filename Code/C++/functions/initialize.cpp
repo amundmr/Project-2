@@ -1,19 +1,21 @@
 #include <armadillo>
+#include <iostream>
 
 using namespace arma;
 using namespace std;
 
 tuple<mat,int> initialize(){
-    double Rstart = 0.0; double Rfin = 1.0; //Start and stop values
-    int N = 10;                             //Number of iterations(integrationpoints)
-    double h = (Rfin-Rstart)/N;             //Spacing/stepsize
-    double d = 2 / (h * h);                 //Diagonal element
-    double a = -1 / (h * h);                //Nondiagonal element
+    int N;
+    double Rstart, Rfin, h, d, a;
+    Rstart = 0.0, Rfin = 1.0, N = 10;
+    h =  Rfin/ N;                //stepsize
+    d = 2 / (h * h);                   //value diagonal element
+    a = -1 / (h * h);                  //value of nondiagonal element
 
-    //Setting up matrix A.
+    //Setting up matrix tridiagonal matrixA.
     mat A = mat(N,N, fill::zeros);
 
-    //Changing the diagonal + non diagnonal(above/below diag) elements
+    //Changingdiagonal + nondiagnonal elements
     A.diag()   += d;
     A.diag(1)  += a;
     A.diag(-1) += a;
