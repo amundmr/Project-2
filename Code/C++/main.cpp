@@ -29,10 +29,13 @@ int main(){
   cout << A << endl;
 
   //Defining matrix C to have eigenvalues of A on its diagonal, by using Jacobi's method
-  mat B = diagonalizer(A);
-  mat C = Jacobi_method(A,N);
-  cout << "this is C:" << C << endl;
+  mat C = mat(N,N, fill::zeros);
 
+  mat B = diagonalizer(A);
+  cout << "B diag:" << B << endl;
+  C = Jacobi_method(A,N);
+  cout << "this is C:" << C << endl;
+  cout << "program ran" << endl;
   //for (int i = 0;i < N-1;i++){
   //  int lambda = d + 2 * a * cos (i * M_PI /(N + 1));
     //cout << lambda << endl;

@@ -5,7 +5,7 @@
 using namespace std;
 using namespace arma;
 
-void Jacobi_rotate(mat A, mat B, int k, int l, int N){
+mat Jacobi_rotate(mat A, int k, int l, int N){
     double sin;
     double cos;
 
@@ -28,7 +28,7 @@ void Jacobi_rotate(mat A, mat B, int k, int l, int N){
         cos = 1.0;
         sin = 0.0;
     }
-
+    mat B = mat(N,N, fill::zeros);
     //Rotating element (k,k) and (l,l) of matrix A in to matrix B
     B(k,k) = pow(cos,2)*A(k,k) - 2.0*cos*sin*A(k,l) + pow(sin,2)*A(l,l);
     B(l,l) = pow(sin,2)*A(k,k) + 2.0*cos*sin*A(k,l) + pow(cos,2)*A(l,l);
@@ -45,4 +45,5 @@ void Jacobi_rotate(mat A, mat B, int k, int l, int N){
         }
 
     }
+    return B;
 }
