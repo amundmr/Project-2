@@ -10,11 +10,12 @@ TEST_CASE("Test max a(i,j"){
   mat a = zeros<mat>(n,n);
   mat v = zeros<mat>(n,n);
   vec r(n);
-  initialize(n,h,a,r,v,0,0);
+ //initialize and vecs
+ initialize(n,h,a,r,0,0);
   int p = 0;
   int q = 0;
   double apq = 0;
-  find_max(a,p,q,apq,n);
+  find_max(a,p,q,apq,n); //finding max and min
 
   REQUIRE(p==2);
   REQUIRE(q==1);
