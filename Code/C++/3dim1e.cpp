@@ -15,7 +15,7 @@ int main() {
 
   cout << A << endl;
   mat C;
-  
+
   C = Jacobi_method(A,N);
 
   cout << C << endl;
