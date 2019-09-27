@@ -1,44 +1,61 @@
-#include <iostream>
-#include <cmath>
 #include <armadillo>
+#include <cmath>
+#include <iostream>
 
 using namespace std;
 using namespace arma;
 
-vec Jacobi_method(mat A, int n);
+mat Jacobi_method(mat A, int N);
 vec arma_eig(mat A);
 
-int main(){
-	int n = 5;
-	int k;
-	int l;
+int main() {
+  //START of tridiagonal matrix implementation
+  double Rho_0, Rho_N, h, d, a, V, Rho;   //Declaring all doubles
 
-	mat A(n,n, fill::zeros);
-	A(0, 0) = A(n-1,n-1) = 2.0;
-	A(0, 1) = A(n-1,n-2) = -1.0;
-		for (int i = 1; i < n-1; i++){
-			A(i, i-1) = A(i, i+1) = -1.0;
-			A(i, i) = 2.0;
-	}
+  int i, N = 5000;
+  Rho_0 = 0.0, Rho_N = 1e10;               //Defining start and stop. Rho_N = Rho_max which approximates infinity
 
-	clock_t t0,t1;
+  h =  (Rho_N-Rho_0)/ N;                  //Stepsize
+  a = -1 / (h * h);                       //Value of nondiagonal element
 
-	t0 = clock();
-	vec arma_eigvals = arma_eig(A);
-	t1 = clock();
 
-	double t_arma = (double (t1 - t0))/CLOCKS_PER_SEC;
+  //Setting up tridiagonal matrix A.
+  mat A = mat(N,N, fill::zeros);
+  for ( i = 0; i < N; i++ ) {             //Calculating the diagonal since it changes with Rho
 
-	t0 = clock();
-	vec eigvals = Jacobi_method(A, n);
-	t1 = clock();
+    Rho = Rho_0 + i * h;
+    V = Rho*Rho;
+    d = 2 / (h * h) + V;                  //Value of diagonal element
+    A(i,i) = d;
+  }
 
-	double t_jacobi = (double (t1- t0)) /CLOCKS_PER_SEC;
+  //Changing the nondiagnonal elements is easier this way
+  A.diag(1)  += a;
+  A.diag(-1) += a;
 
-	cout << "Eigenvalues from arma solver: " << endl;
+  //END of tridiagonal matrix implementation
+
+
+  clock_t t0, t1;
+  //Timing armadillo's eigenvalue solver
+  t0 = clock();
+  vec arma_eigvals = arma_eig(A);
+  t1 = clock();
+  double t_arma = (double (t1 - t0))/CLOCKS_PER_SEC;
+
+  //Timing jacobi's eigenvalue solver
+  t0 = clock();
+  vec eigvals = Jacobi_method(A,N);
+  t1 = clock();
+  double t_jacobi = (double (t1 - t0))/CLOCKS_PER_SEC;
+
+
+  cout << "Eigenvalues from arma solver: " << endl;
 	cout << arma_eigvals << endl;
 	cout << "Time spent on arma solver: " << t_arma << "s" << endl;
 	cout << "Eigenvalues from our Jacobi solver: " << endl;
 	cout << sort(eigvals) << endl;
 	cout << "Time spent on our solver: " << t_jacobi << "s" << endl;
+
+  return 0;
 }
