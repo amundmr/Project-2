@@ -13,6 +13,46 @@ header-includes: |
   \lhead{\leftmark}
   \rfoot{\thepage}
 ---
+
+#1. Abstract
+First study a buckling beam problem  as a classical wave function problem in one dimension. Thereafter we extend the problem to quantum mechanics where electrons move in a three dimensional harmonic oscillator potential.  
+
+
+Finding that.... Jacobi vs.  bisection
+
+- Importance of scaling equations?
+-
+
+# 2. Introduction
+This project aims to look at different methods for solving eigenvalue problems, all widely used with the purpose of making it possible to solve complex equations in for example quantum physics, as we will discover later in this project.
+
+We will solve the following equation:
+
+$$
+\begin{equation}
+\label{eq:1}
+\tag{1}
+\mathbf{Au = u},
+\end{equation}
+$$
+
+
+- Jacobi's method
+
+- lapack
+
+- Bisection method(if we choose not go in the quantum mechanical direction)
+
+
+
+#3. Method
+## 3.1 Jacobi's method
+The Jacobi methods is a widely used iterative solver  and used a great deal when solving partial differential equations.
+
+The aimn is to
+
+---
+
 We are solving the differential equation:
 
 $$\\
@@ -67,10 +107,15 @@ $$\\
 
 Finally we can rewrite it as an eigenvalue problem
 
-$$\\
-\mathbf{Au = \lambda u}, \qquad \textrm {where}\\
-\\$$
+$$
+\begin{equation}
+\label{eq:1}
+\tag{1}
+\mathbf{Au = \lambda u},
+\end{equation}
+$$
 
+where
 $$\\
 \mathbf A =\begin{bmatrix}
     d   &  a   &  0   &   0   &   \dots   &   0  &  0  \\
@@ -89,14 +134,18 @@ $$\\
 
 The endpoints, $u_0$ and $u_N$, are not included, and we will set $d = \frac{2}{h^2}$ and $a = -\frac{1}{h^2}$.
 
-Now we can solve our equation numerically using Jacobi's method and compare with the analytical eingenpairs:
+Now we can solve our equation numerically using Jacobi's method and compare with the analytical eingenvalues:
 
-$$\\
+$$
+\begin{equation}
+\label{eq:2}
+\tag{2}
 \lambda_i = d + 2a \cos (\frac{j \pi}{N+1}) \qquad j = 1, 2, \dots, N.
-\\$$
+\end{equation}
+$$
 
 
-# Project 1 a)
+<!-- Oppgave 2a) -->
 In order to use Jacobi's method , we need to make sure that the unitary transformation preserves the orthogonality of the obtained eigenvectors.  So we assume that our basis of vectors $\mathbf v_i$
 
 $$\\
@@ -137,5 +186,35 @@ $$\\
 \\$$
 
 So orthogonality is preserved during the transformation.
+
+<!-- Oppgave 2b) -->
+
+In order to solve equation $\eqref{eq:1}$ we will implement Jacobi's rotation algorithm. But first we have to do the following:
+- Diagolalize a matrix with a given size(NxN).
+- Use armadillos functions for diagonalizing.
+- Find analytical eigenvalues by $\eqref{eq:2}$ for comparison with the numerical ones.
+
+In our Jacobi method we define the following:
+
+$$\\
+\tan\theta = t = s/c\\
+s = \sin\theta\\
+c = cos \theta \\
+\cot 2\theta = \tau = \frac{a_{ll}-a_{kk}}{2a_{kl}}
+\\$$
+
+We define $\theta$ so all non diagnoal elements of the transformed matrix become non-zero.
+Since
+
+$$\cot2\theta = \frac{1}{2}(\cot\theta-\tan\theta)\\$$
+
+We can rewrite as..
+$$t^2 + 2\tau t - 1 = 0 , $$
+giving
+$$t = -\tau \pm \sqrt{1+\tau^2}.$$
+Then
+$$c = \frac{1}{\sqrt{1+t^2}} \quad \textrm{and} \quad s= tc$$
+
+
 
 kilde til oppgave 2 a): http://www.math.harvard.edu/archive/21b_spring_08/handouts/orthomatrix.pdf
