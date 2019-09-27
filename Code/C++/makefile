@@ -1,15 +1,11 @@
-CC = g++ # compiler of choice
-CCFLAGS = -larmadillo -llapack -lblas -std=c++11 # flags
+CC = g++
+CCFLAGS = -larmadillo -lblas -llapack -std=c++11 -O3
 
-main.exe: obj # target is to produce main.exe, but depends on obj function defined below.
-	g++ main.cpp $(wildcard obj/*.o) $(CCFLAGS) -o main.exe
-# takes every object-file in the folder obj and links them into the executable main.exe
+main: obj
+	$(CC) $(wildcard *.o) main.cpp $(CCFLAGS) -o main.exe
 
-obj: # main.exe's dependency. Creates a directory obj, compiles every .cpp in dir function and moves the .o-files to obj.
-	mkdir obj/; \
-	cd functions; \
-	g++ -c $(CCFLAGS) *.cpp; \
-	mv *.o ../obj; \
+obj:
+	$(CC) $(CCFLAGS) $(wildcard ./functions/*.cpp) -c
 
-clean: # removes the object files and the executable.
-	rm -rf obj/ main.exe
+clean:
+	rm -rf *.o main.exe

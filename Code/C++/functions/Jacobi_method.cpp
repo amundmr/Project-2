@@ -6,24 +6,24 @@ using namespace std;
 using namespace arma;
 
 mat Jacobi_rotate(mat A, int k, int l, int N);
-void off(mat A, int N, double * max, int * k, int * l);
+double off(mat A, int N, int &k, int &l);
 
-mat Jacobi_method(mat A, int N){
-    double epsilon = 1.0e-8;                          //Defining maximum deviation from 0 for the off diagonal elements
-    int max_iterations = 10;                         //Setting a number of max iterations if the tolerance epsilon is not yet met
-    double max = epsilon * 2;                         //Introducing variable for storing max off-diagonal value
-    int k = 0; int l = 0;
-
-    int i = 0;
-    while (max > epsilon && i < max_iterations){     //Run this loop until max deviation is less than eps or max iterations is met
-        max = 0.0;
-        off(A, N, &max, &k, &l);                      //Finding the maximum value and returning its indices k, l
-        cout << "Rotation "<< i << ": " << endl;
-        cout << "max: " << max << endl;
-
-        A = Jacobi_rotate(A,k,l,N);                     //Rotating by means of k, l.
-
+vec Jacobi_method(mat A, int N, int &k, int &l){
+    k = 0;
+    l = 0;
+    double epsilon = 10e-8;                          //Defining maximum deviation from 0 for the off diagonal elements
+    double max_iterations = pow(N, 3);                         //Setting a number of max iterations if the tolerance epsilon is not yet met
+    double max = off(A,N,k,l);                           //Introducing variable for storing max off-diagonal value
+    
+    double i = 0;
+    while (i < max_iterations && max > epsilon){      //Run this loop until max deviation is less than eps or max iterations is met
+        A = Jacobi_rotate(A,k,l,N);                   //Rotating by means of k, l.
+        max = off(A, N, k, l);                  //Finding the maximum value and returning its indices k, l
         i++;
     }
-    return A;
+
+    cout << "The diagonalized matrix found with the Jacobi method:" << A << endl;
+    cout << "Max: " << max << endl;
+    cout << "Number of rotations: " << i << endl;
+    return A.diag();
 }
