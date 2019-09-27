@@ -1,5 +1,3 @@
-//This file uses armadillo, compile using "<compiler> <filename> -larmadillo"
-
 #include <iostream>
 #include <cmath>
 #include <armadillo>
@@ -7,17 +5,14 @@
 using namespace std;
 using namespace arma;
 
-vec eig_solver(mat A, int n);
+vec Jacobi_method(mat A, int n);
 vec arma_eig(mat A);
 
-// Main function
 int main(){
-	// Dimensionality of the matrix
-	int n = 3;
+	int n = 5;
 	int k;
 	int l;
 
-	// Set up the matrix as a tridiagonal matrix
 	mat A(n,n, fill::zeros);
 	A(0, 0) = A(n-1,n-1) = 2.0;
 	A(0, 1) = A(n-1,n-2) = -1.0;
@@ -26,38 +21,24 @@ int main(){
 			A(i, i) = 2.0;
 	}
 
-	// Find the eigenvalues with armadillo function
-	vec arma_eigval;
-	mat arma_eigvec;
+	clock_t t0,t1;
 
+	t0 = clock();
+	vec arma_eigvals = arma_eig(A);
+	t1 = clock();
 
-	// Find the eigenvalues with our own solver
-	vec eigval;
-	mat eigvec;
+	double t_arma = (double (t1 - t0))/CLOCKS_PER_SEC;
 
+	t0 = clock();
+	vec eigvals = Jacobi_method(A, n);
+	t1 = clock();
 
+	double t_jacobi = (double (t1- t0)) /CLOCKS_PER_SEC;
 
-	clock_t start,finish;
-
-	// Set up the matrix as a tridiagonal matrix
-
-	//start timing for armadillo solver
-	start = clock();
-	vec arma_eigvals = arma_eig(A); // std::tie unwraps a tuple
-	finish = clock();
-
-	double t2 = (double (finish - start))/CLOCKS_PER_SEC;
-
-	//Start clock for jacobi method
-	start = clock();
-
-	vec eigvals = eig_solver(A, n);
-
-	finish = clock();
-	double t1 = (double (finish- start)) /CLOCKS_PER_SEC;
-
-	cout << "Arma: " << t2 << "seconds" << endl << arma_eigvals << endl;
-	cout << "Jacobi: " << t1 << "seconds" << endl << eigvals << endl;
-
-	return 1; //success
+	cout << "Eigenvalues from arma solver: " << endl;
+	cout << arma_eigvals << endl;
+	cout << "Time spent on arma solver: " << t_arma << "s" << endl;
+	cout << "Eigenvalues from our Jacobi solver: " << endl;
+	cout << sort(eigvals) << endl;
+	cout << "Time spent on our solver: " << t_jacobi << "s" << endl;
 }
