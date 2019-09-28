@@ -26,9 +26,12 @@ double bisection(double a, double b, int n)
 {
   double c, epsilon = 1E-9, root, fa, fb, fc;
   int i;
-    if ((f(a) * f(b)) > 0) exit(1);         //root not in intervall
+    if ((f(a) * f(b)) > 0)         //root not in intervall
+    {
+      cout << "No roots in intervall [" <<a<< " , "<< b << "]"<<endl;;
+    }
 
-    cout<<setw(12)<<"a"<<setw(18)<<"b"<<setw(18)<<"f(c)"<<setw(18)<<"|a-b|"<<endl;
+    //cout<<setw(12)<<"a"<<setw(18)<<"b"<<setw(18)<<"f(c)"<<setw(18)<<"|a-b|"<<endl;
 
     while (fabs(b - a) >= epsilon)
     {
@@ -39,7 +42,7 @@ double bisection(double a, double b, int n)
       fc = f(c);
 
 
-      cout<<setw(18)<<a<<setw(18)<<b<<setw(18)<<fc<<setw(18)<<fabs(a-b)<<endl;
+      //cout<<setw(18)<<a<<setw(18)<<b<<setw(18)<<fc<<setw(18)<<fabs(a-b)<<endl;
 
         if (fc == 0.0)
           {
@@ -61,13 +64,13 @@ double bisection(double a, double b, int n)
 
     int main()
     {
-      double a = 0;
-      double b = 1;
-      int n = 10;
-      bisection(a,b,n);
-      return 0;
+      double a = -10.0, b = -9.0;
+        int n = 10;
+      for (int i = 0; i  <= 20; i++)
+      {
+        a += 1.0;
+        b += 1.0;
+        bisection(a,b,n);
+      }
+
     }
-
-
-//http://www.mymathlib.com/c_source/matrices/eigen/givens_bisection.c
-//https:  //link.springer.com/content/pdf/10.1007%2FBF02162154.pdf
