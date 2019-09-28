@@ -21,7 +21,7 @@ plt.plot(x,y,color='gray', linewidth=1)
 plt.ylabel("Average Error")
 #plt.xlabel("Integration points, N")
 plt.tick_params(direction='in', top = 'true', right = 'true')
-plt.title("Presicion and time increase with more integration points")
+plt.title(r"Presicion and time increase with more integration points. $ \rho_{max} = 10$")
 #plt.yscale('log')
 #plt.legend()
 
