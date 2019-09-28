@@ -14,7 +14,7 @@ header-includes: |
   \rfoot{\thepage}
 ---
 
-#1. Abstract
+# 1. Abstract
 First study a buckling beam problem  as a classical wave function problem in one dimension. Thereafter we extend the problem to quantum mechanics where electrons move in a three dimensional harmonic oscillator potential.  
 
 
@@ -24,7 +24,7 @@ Finding that.... Jacobi vs.  bisection
 -
 
 # 2. Introduction
-This project aims to look at different methods for solving eigenvalue problems, all widely used with the purpose of making it possible to solve complex equations in for example quantum physics, as we will discover later in this project.
+This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics. In this project we will also explore the eigenvalue solver's value specifically, with a quantum mechanics problem <!--TODO: Outline the problem briefly-->.
 
 We will solve the following equation:
 
@@ -45,11 +45,16 @@ $$
 
 
 
-#3. Method
+# 3. Theory and technicalities
+<!-- TODO: Short explanation of orthogonality/unity. -->
 ## 3.1 Jacobi's method
-The Jacobi methods is a widely used iterative solver  and used a great deal when solving partial differential equations.
+The Jacobi eigenvalue method is an iterative method for finding eigenvalues. It is based on the idea of doing a number of orthogonal basis transformations on the matrix in question, with the goal of diagonalizing it.
 
-The aimn is to
+$$
+  \mathbf{Q}_n^T\mathbf{Q}_{n-1}^T...\mathbf{Q}_1^T\mathbf{A}\mathbf{Q}_1...\mathbf{Q}_{n-1}\mathbf{Q}_n=\mathbf{D},
+$$
+
+where $\mathbf{A}$ is the starting matrix, $\mathbf{Q}_i$ are orthogonal matrices and $\mathbf{D}$ is diagonal, containing the eigenvalues.
 
 ---
 
