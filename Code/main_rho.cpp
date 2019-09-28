@@ -21,7 +21,7 @@ int main() {
   string filename = "Rho-VS-Error";
   ofile.open(filename);
 
-  for (i = 3; i < 12; i++){
+  for (i = 4; i < 12; i++){
 
     double Rho_N = i*1.0;                //Defining the approximation of infinity
     int N = 200;                      //Defining number of integration points
