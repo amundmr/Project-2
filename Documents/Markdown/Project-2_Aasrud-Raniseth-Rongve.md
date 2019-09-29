@@ -27,14 +27,9 @@ This project aims to look at different numerical methods for solving eigenvalue 
 
 We will solve the following equation:
 
-$$
-\begin{equation}
-\label{eq:1}
-\tag{1}
-\mathbf{Au = u},
-\end{equation}
-$$
+$$-\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho)$$ 
 
+where $\rho$ and $\lambda$ are the scaled values from a given differential equation representing a physical system.
 <!-- TODO: Jacobi's method -->
 
 <!-- TODO: Scaling functions and quantum case -->
@@ -47,11 +42,27 @@ $$
 
 # 3.1 The problem
 
-<!-- TODO: Outline the buckling beam and quantum problem. -->
+In this project, we are considering two wave function problems in one dimension. Generally, the differential equation we are to solve can be written like this:
+
+$$
+  -\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho).\ \ \ (1)
+$$
+<!-- TODO: Her må vi kanskje få fiksa ordentlig nummerering av likningene? Vet det fins en pandoc-plugin som gjør dette -->
+This equation can be applied to both problems by making $\rho$ and $\lambda$ appropriate scaled values for the system in question. 
+
+For the buckling beam, $u(x)$ is the displacement in the y-direction. With the length of the beam being $L$, we say that the scaled value $\rho=\frac{x}{L}$, where $x\in[0,L]$ is the distance along the beam. The variable $\rho$ is now defined in $[0,1]$ with boundary conditions for the scaled function $u(\rho)$, $u(0)=u(1)=0$ - nice and general.
+
+<!-- TODO: Scaled values for quantum and buckling beam problem. -->
 
 # 3.2 Orthogonal transformations
 
-<!-- TODO: Short explanation of orthogonality/unity. -->
+An orthogonal matrix $\mathbf{Q}$ has this property:
+
+$$
+  \mathbf{Q}^T\mathbf{Q}=\mathbb{I}\Rightarrow \mathbf{Q}^T=\mathbf{Q}^{-1}
+$$
+
+where $\mathbb{I}$ is the identity.
 
 ## 3.1 Jacobi's method
 
