@@ -22,8 +22,7 @@ First study a buckling beam problem  as a classical wave function problem in one
 <!-- TODO: Importance of scaling equations? -->
 
 # 2. Introduction
-This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics. In this project we will also explore the eigenvalue solver's value specifically, with a quantum mechanics problem.
-<!--TODO: Outline the problem briefly-->
+This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics. In this project we will also explore the eigenvalue solver's value specifically, with a classical case - the buckling beam problem - and a quantum case - modelling electrons as quantum dots.
 
 We will solve the following equation:
 
@@ -38,9 +37,9 @@ where $\rho$ and $\lambda$ are the scaled values from a given differential equat
 
 <!-- TODO: Bisection method -->
 
-An eigenvalue solver is extremely important in many different types of calculations and is thus of interest for many scientists. We will demonstrate this by calculating the eigenvalues for both a buckling beam problem and an quantum mechanical problem. The eigenvalue algorithm mainly explored in this paper is the Jacobi eigenvalue algorithm first proposed by Carl Gustav Jacob Jacobi. He proposed this algorithm already in 1846 [@Jacobi1846], but it only became widely used with the rise of the computer in the 1950s.
+An eigenvalue solver is extremely important in many different types of calculations and is thus of interest for many scientists. We will demonstrate this by calculating the eigenvalues for both a buckling beam problem and an quantum mechanical problem. The eigenvalue algorithm mainly explored in this paper is the Jacobi eigenvalue algorithm first proposed by Carl Gustav Jacob Jacobi. He proposed this algorithm already in 1846 @Jacobi, but it only became widely used with the rise of the computer in the 1950s.
 
-We will also compare this to another method called the bisection method.
+We will also compare this to another method, utilizing the bisection method to find the roots corresponding to eigenvalues.
 
 
 # 3. Theory and technicalities
@@ -54,8 +53,6 @@ $$-\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho).$$  {#eq:diffeq}
 This equation can be applied to both problems by making $\rho$ and $\lambda$ appropriate scaled values for the system in question.
 
 ### Buckling beam
-
-<!-- TODO: More on the buckling beam problem -->
 
 For the buckling beam, we are solving this differential equation:
 
@@ -249,10 +246,6 @@ $$t = -\tau \pm \sqrt{1+\tau^2}.$$
 Then
 $$c = \frac{1}{\sqrt{1+t^2}} \quad \textrm{and} \quad s= tc$$
 
-
-
-kilde til oppgave 2 a): http://www.math.harvard.edu/archive/21b_spring_08/handouts/orthomatrix.pdf
-
 ## 3.4 Our method applied
 
 To solve the buckling beam problem, the approach is quite straight forward. Our solver finds the eigenvalues $\lambda$, which gives the values of interest.
@@ -299,9 +292,7 @@ $$
   P_{A,n}(\lambda)=(d-\lambda)P_{A,n-1}(\lambda)-aP_{A,n-2}(\lambda), \qquad P_{A,0}(\lambda)=1, \qquad P_{A,1}(\lambda)=d-\lambda
 $$
 
-Our approach to finding roots of this polynomial involves testing over several sub-domains $[a,b]$. In every sub-domain we do bisection. This is simply defining a midpoint $c$ and checking which of the domains $[a,c]$ and $[c,b]$ contain a root (if any). If, for example $f(a)*f(c)<0$, we conclude that a root is in $[a,c]$ ($f(a)$ and $f(c)$ have different signs). We obviously also check if $c$ is a root. This procedure is done until we are sufficiently close to the root we are seeking. 
-
-<!-- TODO: Citation (https://courses.physics.ucsd.edu/2016/Spring/physics142/Lectures/Lecture15/Hjorth-JensenLectures2010.pdf, side 137) -->
+Our approach to finding roots of this polynomial involves testing over several sub-domains $[a,b]$. In every sub-domain we do bisection. This is simply defining a midpoint $c$ and checking which of the domains $[a,c]$ and $[c,b]$ contain a root (if any). If, for example $f(a)*f(c)<0$, we conclude that a root is in $[a,c]$ ($f(a)$ and $f(c)$ have different signs). We obviously also check if $c$ is a root. This procedure is done until we are sufficiently close to the root we are seeking. @Hjorth-Jensen2010
 
 # Results
 
@@ -348,3 +339,4 @@ The time spent on the calculations seem pretty random and that is probably becau
 # Conclusion
 
 # References
+{#refs}
