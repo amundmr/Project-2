@@ -15,7 +15,7 @@ TEST_CASE("Test max a(i,j"){
   int p = 0;
   int q = 0;
   double apq = 0;
-  find_max(a,p,q,apq,n); //finding max and min
+  off(a,p,q,apq,n); //finding max and min
 
   REQUIRE(p==2);
   REQUIRE(q==1);
