@@ -9,7 +9,7 @@ double f(double x, int n)  //defining function
 {
   double f, diag = 2.0, nondiag = -1.0;
   vec p = zeros<vec>(n);
-  
+
   p(0) = 1;
   p(1) = diag - x;
 
@@ -54,4 +54,5 @@ int main(){
 
     bisection(a,b,n);
   }
+  jacobi_method(A)
 }
