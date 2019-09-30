@@ -107,13 +107,13 @@ $$\\
 
 Finally we can rewrite it as an eigenvalue problem
 
-$$
+$$\\
 \begin{equation}
 \label{eq:1}
 \tag{1}
 \mathbf{Au = \lambda u},
 \end{equation}
-$$
+\\$$
 
 where
 $$\\
@@ -190,7 +190,7 @@ So orthogonality is preserved during the transformation.
 <!-- Oppgave 2b) -->
 
 In order to solve equation $\eqref{eq:1}$ we will implement Jacobi's rotation algorithm. But first we have to do the following:
-- Diagolalize a matrix with a given size(NxN).
+- Diagonalize a matrix with a given size($N \times N$).
 - Use armadillos functions for diagonalizing.
 - Find analytical eigenvalues by $\eqref{eq:2}$ for comparison with the numerical ones.
 
@@ -218,3 +218,79 @@ $$c = \frac{1}{\sqrt{1+t^2}} \quad \textrm{and} \quad s= tc$$
 
 
 kilde til oppgave 2 a): http://www.math.harvard.edu/archive/21b_spring_08/handouts/orthomatrix.pdf
+
+<!-- Oppgave 2d) -->
+### Applying these methods to quantum calculations
+To demonstrate that our eigenvalue solver is capable we will apply it on a quantum mechanical problem with one electron as a quantum dot in 3-dimensional space stuck in an harmonic oscillator potential. What we do is to make the Schroedinger equation with spherical coordinates work with our solver. That means that we eliminate the constants by introducing a variable and then discretizing the differential equation so we can make a tridiagonal matrix which will be the input to our eigenvalue solver.
+
+With these eigenvalues it is possible to calculate the energy and position of the electron, but we will not demonstrate that here. We will in stead investigate what number of integration points, $N$, and what approximation of infinity we can use to get sufficiently correct eigenvalues.
+
+The following assumptions are made:
+- Electrons move in a three-dimensional harmonic oscillator potential.
+- They repel each other via the static Coulomb interaction.
+- There is spherical symmetry.
+- The radial position $u(r)$ has boundary conditions $u(0) = 0$ and $u(\infty) = 0$.
+
+The spherical part of Schroedinger's equation reads as follows:
+
+\[-\frac{\hbar^2}{2m}\left(\frac{1}{r^2}\frac{d}{dr}r^2\frac{d}{dr} - \frac{l(l+1)}{r^2}\right) R(r) + V(r)R(r) = ER(r)\]
+
+Where $V(r)$ is the harmonic oscillator potential $\frac{1}{2}kr^2$ with $k=m \omega^2$ and E is the energy of the harmonic oscillator. The quantum number $l$ is the orbital momentum of the electron and the oscillator frequency is $\omega$ and its energies are
+
+\[E_{nl} = \hbar \omega \left(2n + l + \frac{3}{2} \right)\]
+
+Where \
+$n = 0,1,2,..$ and $l = 0, 1, 2, ...$
+
+Since this is already transformed to spherical coordinates, we have $r \in [0, \infty)$
+
+If we substitute $R(r) = \frac{1}{r}u(r)$ we get
+
+\[-\frac{\hbar}{2m}\frac{d^2}{dr^2}u(r) + \left( V(r) + \frac{l(l+1)}{r^2}\frac{\hbar^2}{2m}\right)u(r) = Eu(r)\]
+
+The next thing to do is to introduce a dimensionless variable $\rho$ which contains a variable $\alpha$ which we can later define so that we can transform our spherical Schroedinger's equation to an eigenvalue problem which we can solve using our Jacobi's method eigenvalue solver described above. \ref(sec:Jacobi)
+
+If $\rho = \frac{1}{\alpha} r$ the equation reads:
+
+\[-\frac{\hbar^2}{2m\alpha^2}\frac{d^2}{d\rho^2}u(\rho) +  \left( V(\rho) + \frac{l(l+1)}{\rho^2}\frac{\hbar^2}{2m\alpha^2}\right)u(\rho) = Eu(\rho)\]
+Multiplying both sides by $2m\alpha^2/\hbar^2$ we get
+\[-\frac{d^2}{d\rho^2}u(\rho) + \frac{mk}{\hbar}\alpha^4\rho^2u(\rho) = \frac{2m\alpha^2}{\hbar^2}Eu(\rho)\]
+We can now fix the constant $\alpha$ to eliminate all the constants.
+\[\frac{mk}{\hbar^2}\alpha^2 = 1 \hspace{1cm} \rightarrow \hspace{1cm} \alpha = \left(\frac{\hbar^2}{mk}\right)^{1/4}\]
+
+If we now define
+\[\lambda = \frac{2m\alpha^2}{\hbar^2}E\]
+The Schroedinger's equation can be rewritten as
+\[-\frac{d^2}{d\rho^2}u(\rho) + \rho^2u(\rho) = \lambda u(\rho)\]
+This is a similar problem to the buckling beam we described above. So summarize, the compact discretized Schroedinger equation will be
+\[-\frac{u_{i+1} - 2u_i + u_{i-1}}{h^2} + V_i u_i = \lambda u_i\]
+Where $V_i = \rho_i^2$ and $h$ is the steplength.
+From this it is clear that on tridiagonal matrix form it is written
+$$\\
+\begin{bmatrix}
+    d_i   &  e_i   &  0   &  \dots    &   \dots   &   \dots  &  0  \\
+    e_i   &  d_i   &  e_i   &   0   &   \dots   &  \dots   &  0  \\
+    0   &  e_i   &  d_i   &   e_i   &    0      &   \dots & 0 \\
+    \vdots & 0 & \ddots & \ddots & \ddots &  & \vdots\\
+    \vdots   &  \vdots &  & 0 &    e_i   &     d_i & e_i   \\
+    0   &  \dots & \dots & \dots &  0 &     e_i & d_i   \\
+\end{bmatrix}
+
+\begin{bmatrix}
+    u_1 \\   u_2 \\ u_3 \\  \vdots \\ u_{N-2} \\ u_{N-1}
+\end{bmatrix}
+
+= \lambda \begin{bmatrix}
+    u_1 \\   u_2 \\ u_3 \\  \vdots \\ u_{N-2} \\ u_{N-1}
+\end{bmatrix}
+\\$$
+Where the diagonal elements are
+\[d_i = \frac{2}{h^2} + V_i\]
+and the non-diagonal elements is a constant given by
+\[e_i = -\frac{1}{h^2}\]
+
+It is now clear that the eigenvalue solver we made will be able to find these eigenvalues. However it will have to be tweaked by finding a sufficient number of integration points, $N$ and an approximation of $\rho_{max}$ to infinity that yields eigenvalues close enough to the analytical ones of which the first four is $\lambda = 3,7,11,15$.
+
+To do this we fix $\rho_{max} = 10$ and find the average deviation of our calculated ones from the analytical ones for $N = {100, 200, 300, 400}$ and plot the error and time versus the number of integration points. This can be found in the d branch in [_Code/main.cpp_](https://github.com/amundmr/Project-2/blob/d/Code/main.cpp)
+
+Then we fix the number of integration points to $N = 200$ and calculate the average error for the approximations $\rho_{max} = {4, 5, 6, 7, 8, 9, 10, 11}$ and plot the error and time versus the approximation of $\rho_{max}$. This can be found in the d branch in [_Code/main_rho.cpp_](https://github.com/amundmr/Project-2/blob/d/Code/main_rho.cpp)
