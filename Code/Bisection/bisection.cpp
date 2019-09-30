@@ -5,6 +5,8 @@
 using namespace std;
 using namespace arma;
 
+mat Jacobi_method(mat A, int N);
+
 double f(double x, int n)  //defining function
 {
   double f, diag = 2.0, nondiag = -1.0;
@@ -54,5 +56,5 @@ int main(){
 
     bisection(a,b,n);
   }
-  jacobi_method(A)
+  vec eigvals = jacobi_method(A,n);
 }
