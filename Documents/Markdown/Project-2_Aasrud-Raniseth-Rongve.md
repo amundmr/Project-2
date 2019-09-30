@@ -27,7 +27,7 @@ This project aims to look at different numerical methods for solving eigenvalue 
 
 We will solve the following equation:
 
-$$-\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho)$$ 
+$$-\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho)$$
 
 where $\rho$ and $\lambda$ are the scaled values from a given differential equation representing a physical system.
 <!-- TODO: Jacobi's method -->
@@ -48,7 +48,7 @@ $$
   -\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho).\ \ \ (1)
 $$
 <!-- TODO: Her må vi kanskje få fiksa ordentlig nummerering av likningene? Vet det fins en pandoc-plugin som gjør dette -->
-This equation can be applied to both problems by making $\rho$ and $\lambda$ appropriate scaled values for the system in question. 
+This equation can be applied to both problems by making $\rho$ and $\lambda$ appropriate scaled values for the system in question.
 
 For the buckling beam, $u(x)$ is the displacement in the y-direction. With the length of the beam being $L$, we say that the scaled value $\rho=\frac{x}{L}$, where $x\in[0,L]$ is the distance along the beam. The variable $\rho$ is now defined in $[0,1]$ with boundary conditions for the scaled function $u(\rho)$, $u(0)=u(1)=0$ - nice and general.
 
@@ -317,3 +317,26 @@ It is now clear that the eigenvalue solver we made will be able to find these ei
 To do this we fix $\rho_{max} = 10$ and find the average deviation of our calculated ones from the analytical ones for $N = {100, 200, 300, 400}$ and plot the error and time versus the number of integration points. This can be found in the d branch in [_Code/main.cpp_](https://github.com/amundmr/Project-2/blob/d/Code/main.cpp)
 
 Then we fix the number of integration points to $N = 200$ and calculate the average error for the approximations $\rho_{max} = {4, 5, 6, 7, 8, 9, 10, 11}$ and plot the error and time versus the approximation of $\rho_{max}$. This can be found in the d branch in [_Code/main_rho.cpp_](https://github.com/amundmr/Project-2/blob/d/Code/main_rho.cpp)
+
+
+# Results
+
+
+### Quantum mechanics eigenvalue calculations
+The investigation of a sufficient amount of integration points, $N$ gave us the plot shown in figure \ref(fig:int-points).
+
+![Shows time spent and average error vs number of integration points, $N$](../Images/int-points-plot.png)
+
+The investigation of the best approximation to infinity gave us the plot shown in figure \ref(fig:rho-approx).
+![Shows time spent and average error vs approximation of infinity](../Images/rho_approx_plot.png)
+It is also worth noting that all these graphs are reproducible, except the time graph of the approximation of $\rho_{max}$ which were very different every time.
+
+
+# Discussion
+
+### Quantum mechanics eigenvalue calculations
+From the figures presented in the results we see that while a higher number of integration points yields better results, a big downside is that the time spent also increases.
+
+With the changing of $\rho_{max}$ we see that first the error decreases, but after $\rho_{max} = 5$ we actually start to see an increase in error again. This might be because a higher $\rho_{max}$ gives a bigger step-size which again gives lower numbers on the off-diagonal elements, which in turn yields a lower amount of Jacobi rotations before the off-diagonal elements are below the tolerance for being called zero.
+
+The time spent on the calculations seem pretty random and that is probably because the changing of $\rho_{max}$ doesn't make the computer do any more or less work, it simply changes the numbers. The fluctuations might therefore just be that the computer has different background tasks running at different times.
