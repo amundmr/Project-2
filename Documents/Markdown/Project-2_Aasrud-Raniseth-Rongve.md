@@ -28,8 +28,7 @@ Our algorithm for Jacobi is rather inefficient when dealing with matrices larger
 <!-- TODO: State some numerical results - how much more efficient is the different methods compared to each oter? -->
 
 # 2. Introduction
-This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics. In this project we will also explore the eigenvalue solver's value specifically, with a quantum mechanics problem.
-<!--TODO: Outline the problem briefly-->
+This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics. In this project we will also explore the eigenvalue solver's value specifically, with a classical case - the buckling beam problem - and a quantum case - electrons as quantum dots.
 
 We will solve the following equation:
 
@@ -44,9 +43,9 @@ where $\rho$ and $\lambda$ are the scaled values from a given differential equat
 
 <!-- TODO: Bisection method -->
 
-An eigenvalue solver is extremely important in many different types of calculations and is thus of interest for many scientists. We will demonstrate this by calculating the eigenvalues for both a buckling beam problem and an quantum mechanical problem. The eigenvalue algorithm mainly explored in this paper is the Jacobi eigenvalue algorithm first proposed by Carl Gustav Jacob Jacobi. He proposed this algorithm already in 1846 [@Jacobi1846], but it only became widely used with the rise of the computer in the 1950s.
+The eigenvalue algorithm mainly explored in this paper is the Jacobi eigenvalue algorithm first proposed by Carl Gustav Jacob Jacobi. He proposed this algorithm already in 1846 [@Jacobi], but it only became widely used with the rise of the computer in the 1950s. 
 
-We will also compare this to another method called the bisection method.
+In addition to the Jacobi method for eigenvalues, we will also compare this to a somewhat simpler method. This utilizes bisection to find the roots corresponding to the eigenvalues, which should be more effective.
 
 
 # 3. Theory and technicalities
@@ -305,9 +304,7 @@ $$
   P_{A,n}(\lambda)=(d-\lambda)P_{A,n-1}(\lambda)-aP_{A,n-2}(\lambda), \qquad P_{A,0}(\lambda)=1, \qquad P_{A,1}(\lambda)=d-\lambda
 $$
 
-Our approach to finding roots of this polynomial involves testing over several sub-domains $[a,b]$. In every sub-domain we do bisection. This is simply defining a midpoint $c$ and checking which of the domains $[a,c]$ and $[c,b]$ contain a root (if any). If, for example $f(a)*f(c)<0$, we conclude that a root is in $[a,c]$ ($f(a)$ and $f(c)$ have different signs). We obviously also check if $c$ is a root. This procedure is done until we are sufficiently close to the root we are seeking.
-
-<!-- TODO: Citation (https://courses.physics.ucsd.edu/2016/Spring/physics142/Lectures/Lecture15/Hjorth-JensenLectures2010.pdf, side 137) -->
+Our approach to finding roots of this polynomial involves testing over several sub-domains $[a,b]$. In every sub-domain we do bisection. This is simply defining a midpoint $c$ and checking which of the domains $[a,c]$ and $[c,b]$ contain a root (if any). If, for example $f(a)*f(c)<0$, we conclude that a root is in $[a,c]$ ($f(a)$ and $f(c)$ have different signs). We obviously also check if $c$ is a root. This procedure is done until we are sufficiently close to the root we are seeking. @Hjorth-Jensen2010
 
 # Results
 
@@ -354,3 +351,4 @@ The time spent on the calculations seem pretty random and that is probably becau
 # Conclusion
 
 # References
+{#refs}
