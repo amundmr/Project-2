@@ -5,12 +5,12 @@
 using namespace std;
 using namespace arma;
 
-vec arma_eig(mat A){
+
+
+vec arma_eig(mat A)
 	vec eigval;
 	mat eigvec;
 
 	eig_sym(eigval, eigvec, A);
 
-
 	return eigval;
-}

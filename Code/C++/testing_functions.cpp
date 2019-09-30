@@ -1,44 +1,75 @@
 #include "catch.hpp"
-#include "jacobi.h" //må få riktig navn her
+#include <armadillo>
+#include <cmath>
+#include <iostream>
 
+#include<fstream>
+#include<math.h>
+#include<iomanip>
+
+#include<algorithm>
+#include<vector>
+
+
+//#include "jacobi_method.h" //må få riktig navn her
 using namespace std;
+using namespace arma;
+
+mat Jacobi_rotate(mat A, int k, int l, int n);
+double off(mat A, int &k, int &l, int n);
+vec arma_eig(mat A);
+vec Jacobi_method(mat A, int n);
+
+TEST_CASE("Test max a(i,j)"){
+  int n = 10;
+  mat A(n,n, fill::zeros);
+  A.diag() += 2;
+  A.diag(-1) -= 1;
+  A.diag(1) -= 1;
 
 
-TEST_CASE("Test max a(i,j"){
-  int N = 3;
-  double pmin = 0, pmax = 10, h = (pmax-pmin)/(double(N));
+  double pmin = 0, pmax = 10, h = (pmax-pmin)/(n);
   mat a = zeros<mat>(n,n);
   mat v = zeros<mat>(n,n);
   vec r(n);
- //initialize and vecs
- initialize(n,h,a,r,0,0);
+
   int p = 0;
   int q = 0;
   double apq = 0;
-  off(a,p,q,apq,n); //finding max and min
 
-  REQUIRE(p==2);
-  REQUIRE(q==1);
+  off(A, p, q, n); //finding max and min
+
+  REQUIRE(p==0);
+  REQUIRE(q==0);
   REQUIRE(apq == Approx(-0.09));
 
 }
 
 
 TEST_CASE("Eigenvalues"){
-  int N = 5, interact = 0;
-  double conv = 0.001, wr =0.01, pmin = 0, pmax = 10, h = (pmax-min)/(double(N));
-  N = N-1;
+  int n = 10;
+  mat A(n,n, fill::zeros);
+  A.diag() += 2;
+  A.diag(-1) -= 1;
+  A.diag(1) -= 1;
+
+  int interact = 0;
+  double conv = 0.001, wr =0.01, pmin = 0, pmax = 10, h = (pmax-pmin)/(double(n));
+  n = n-1;
   mat a = zeros<mat>(n,n);
   mat v = zeros<mat>(n,n);
   vec r(n);
 
-  initialize(variables);
-  jacobi(variables)
+  Jacobi_method(A,n);
 
-  vector<double>eigenvalue=get_eigenvals(a,n);
+  vec eigenvalue = arma_eig(A);
 
-  REQUIRE(eigenvalue[0] = approx())
-  REQUIRE(eigenvalue[1] = approx())
-  REQIORE(eigenvalye[2] = approx())
+    double eig_1 = eigenvalue[0];
+    double eig_2 = eigenvalue[1];
+    double eig_3 = eigenvalue[2];
+
+  REQUIRE( eig_1 = Approx( 0.0810 )..epsilon(0.00001));
+  REQUIRE( eig_2 = Approx( 0.23175 ).epsilon(0.00001));
+  REQUIRE( eig_3 = Approx( 0.06903 ).epsilon(0.00001));
 
 }
