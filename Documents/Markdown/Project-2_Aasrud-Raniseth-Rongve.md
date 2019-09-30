@@ -38,6 +38,11 @@ where $\rho$ and $\lambda$ are the scaled values from a given differential equat
 
 <!-- TODO: Bisection method -->
 
+An eigenvalue solver is extremely important in many different types of calculations and is thus of interest for many scientists. We will demonstrate this by calculating the eigenvalues for both a buckling beam problem and an quantum mechanical problem. The eigenvalue algorithm mainly explored in this paper is the Jacobi eigenvalue algorithm first proposed by Carl Gustav Jacob Jacobi. He proposed this algorithm already in 1846 [@Jacobi1846], but it only became widely used with the rise of the computer in the 1950s.
+
+We will also compare this to another method called the bisection method.
+
+
 # 3. Theory and technicalities
 
 ## 3.1 The problem
@@ -121,7 +126,7 @@ $$
   -\frac{d^2u(\rho)}{d\rho^2} + \rho^2u(\rho) = \lambda u(\rho),
 $$
 
-which is solvable by an eigenvalue solver. The difference this time, however, is the added potential $\rho^2u(\rho)$. 
+which is solvable by an eigenvalue solver. The difference this time, however, is the added potential $\rho^2u(\rho)$.
 
 ## 3.2 Orthogonal transformations
 
