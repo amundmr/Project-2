@@ -12,6 +12,8 @@ header-includes: |
   \rhead{Project 2}
   \lhead{\leftmark}
   \rfoot{\thepage}
+  \usepackage{float}
+  \floatplacement{figure}{H}
 ---
 
 # 1. Abstract
