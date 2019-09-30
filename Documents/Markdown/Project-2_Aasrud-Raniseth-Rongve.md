@@ -301,25 +301,50 @@ $$
 
 Our approach to finding roots of this polynomial involves testing over several sub-domains $[a,b]$. In every sub-domain we do bisection. This is simply defining a midpoint $c$ and checking which of the domains $[a,c]$ and $[c,b]$ contain a root (if any). If, for example $f(a)*f(c)<0$, we conclude that a root is in $[a,c]$ ($f(a)$ and $f(c)$ have different signs). We obviously also check if $c$ is a root. This procedure is done until we are sufficiently close to the root we are seeking. 
 
+<!-- TODO: Citation (https://courses.physics.ucsd.edu/2016/Spring/physics142/Lectures/Lecture15/Hjorth-JensenLectures2010.pdf, side 137) -->
+
 # Results
 
 ## Buckling beam problem
 
+Our program [*/Code/Buckling_beam/*](https://github.com/amundmr/Project-2/tree/master/Code/Buckling_beam) gives these eigenvalues for a matrix of size $N=10$:
+
+```
+0.0810
+0.3175
+0.6903
+1.1692
+1.7154
+2.2846
+2.8308
+3.3097
+3.6825
+3.9190
+```
+
+These correspond both with the eigenvalues from armadillos diagonalizer and with the analytical ones. Time spent on the different solvers as well as the maximum non-diagonal element and number of rotations can be found by running the program [main.exe](https://github.com/amundmr/Project-2/blob/master/Code/Buckling_beam/main.exe).
+
 ## Quantum mechanics eigenvalue calculations
-The investigation of a sufficient amount of integration points, $N$ gave us the plot shown in figure \ref(fig:int-points).
 
-![Shows time spent and average error vs number of integration points, $N$](../Images/int-points-plot.png)
+The investigation of a sufficient amount of integration points $N$, with the program in [/Code/Quantum-case/](https://github.com/amundmr/Project-2/tree/master/Code/Quantum-case), gave us the plot shown in figure @fig:qfig1.
 
-The investigation of the best approximation to infinity gave us the plot shown in figure \ref(fig:rho-approx).
-![Shows time spent and average error vs approximation of infinity](../Images/rho_approx_plot.png)
+![Shows time spent and average error vs number of integration points, $N$](../Images/int-points-plot.png){#fig:qfig1}
+
+The investigation of the best approximation to infinity gave us the plot shown in figure @fig:qfig2.
+
+![Shows time spent and average error vs approximation of infinity](../Images/rho_approx_plot.png){#fig:qfig2}
+
 It is also worth noting that all these graphs are reproducible, except the time graph of the approximation of $\rho_{max}$ which were very different every time.
-
 
 # Discussion
 
-### Quantum mechanics eigenvalue calculations
+## Quantum mechanics eigenvalue calculations
 From the figures presented in the results we see that while a higher number of integration points yields better results, a big downside is that the time spent also increases.
 
 With the changing of $\rho_{max}$ we see that first the error decreases, but after $\rho_{max} = 5$ we actually start to see an increase in error again. This might be because a higher $\rho_{max}$ gives a bigger step-size which again gives lower numbers on the off-diagonal elements, which in turn yields a lower amount of Jacobi rotations before the off-diagonal elements are below the tolerance for being called zero.
 
 The time spent on the calculations seem pretty random and that is probably because the changing of $\rho_{max}$ doesn't make the computer do any more or less work, it simply changes the numbers. The fluctuations might therefore just be that the computer has different background tasks running at different times.
+
+# Conclusion
+
+# References
