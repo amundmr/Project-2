@@ -17,9 +17,15 @@ header-includes: |
 # 1. Abstract
 First study a buckling beam problem  as a classical wave function problem in one dimension. Thereafter we extend the problem to quantum mechanics where electrons move in a three dimensional harmonic oscillator potential.  
 
+The problem is solved as an eigenvalue problem by two ? different methods, the Jacobi method and the bisection method. Choosing the approach with bisection due to a greater interest in the mathematics rather than the quantum physic's.
+
+Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than ............. The bisection is a really simple and efficient method for finding eigenvalues with a set precision. On the other hand it will not produce /find the eigenvectors. 
+
 <!-- TODO: Jacobi vs.  bisection -->
 
 <!-- TODO: Importance of scaling equations? -->
+
+<!-- TODO: State some numerical results - how much more efficient is the different methods compared to each oter? -->
 
 # 2. Introduction
 This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics. In this project we will also explore the eigenvalue solver's value specifically, with a quantum mechanics problem.
@@ -299,7 +305,7 @@ $$
   P_{A,n}(\lambda)=(d-\lambda)P_{A,n-1}(\lambda)-aP_{A,n-2}(\lambda), \qquad P_{A,0}(\lambda)=1, \qquad P_{A,1}(\lambda)=d-\lambda
 $$
 
-Our approach to finding roots of this polynomial involves testing over several sub-domains $[a,b]$. In every sub-domain we do bisection. This is simply defining a midpoint $c$ and checking which of the domains $[a,c]$ and $[c,b]$ contain a root (if any). If, for example $f(a)*f(c)<0$, we conclude that a root is in $[a,c]$ ($f(a)$ and $f(c)$ have different signs). We obviously also check if $c$ is a root. This procedure is done until we are sufficiently close to the root we are seeking. 
+Our approach to finding roots of this polynomial involves testing over several sub-domains $[a,b]$. In every sub-domain we do bisection. This is simply defining a midpoint $c$ and checking which of the domains $[a,c]$ and $[c,b]$ contain a root (if any). If, for example $f(a)*f(c)<0$, we conclude that a root is in $[a,c]$ ($f(a)$ and $f(c)$ have different signs). We obviously also check if $c$ is a root. This procedure is done until we are sufficiently close to the root we are seeking.
 
 <!-- TODO: Citation (https://courses.physics.ucsd.edu/2016/Spring/physics142/Lectures/Lecture15/Hjorth-JensenLectures2010.pdf, side 137) -->
 
