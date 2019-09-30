@@ -19,19 +19,18 @@ TEST_CASE("Test max a(i,j)"){
   A.diag() += 2;
   A.diag(-1) -= 1;
   A.diag(1) -= 1;
-  cout << A << endl;
-
 
   //Declaring k and l in memory for off() to return max indexes to
   int k = 0;
   int l = 0;
 
-  double apq = off(A, k, l, n); //finding max indexes, returning value
+  //Finding max indices, returning value
+  double max = off(A, k, l, n);
 
   //Require that both indexes are 0 since the largest element is for 0
   REQUIRE(k==0);
-  REQUIRE(l==0);
-  REQUIRE(apq == Approx(2));
+  REQUIRE(l==1);
+  REQUIRE(max == Approx(1));
 
 }
 
@@ -44,9 +43,11 @@ TEST_CASE("Testing eigenvalues"){
   A.diag(-1) -= 1;
   A.diag(1) -= 1;
 
-
-
+  //Getting a vector with eigenvalues
   vec eigvec = Jacobi_method(A,n);
+
+  //sorting the values
+  eigvec = sort(eigvec);
 
   double eps = 0.00001;
 

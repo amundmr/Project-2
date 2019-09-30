@@ -16,11 +16,11 @@ test_main.o :			test_main.cpp
 test_func.o :			test_func.cpp
 						${CPPflags} -c test_func.cpp
 
-Jacobi_method.o :		../functions/Jacobi_method.cpp
-						${CPPflags} -c ../functions/Jacobi_method.cpp
+Jacobi_method.o :		../Jacobi_method/Jacobi_method.cpp
+						${CPPflags} -c ../Jacobi_method/Jacobi_method.cpp
 
-Jacobi_rotate.o :		../functions/Jacobi_rotate.cpp
-						${CPPflags} -c ../functions/Jacobi_rotate.cpp
+Jacobi_rotate.o :		../Jacobi_method/Jacobi_rotate.cpp
+						${CPPflags} -c ../Jacobi_method/Jacobi_rotate.cpp
 
-off.o :		../functions/off.cpp
-						${CPPflags} -c ../functions/off.cpp
+off.o :		../Jacobi_method/off.cpp
+						${CPPflags} -c ../Jacobi_method/off.cpp
