@@ -303,6 +303,8 @@ Our approach to finding roots of this polynomial involves testing over several s
 
 # Results
 
+## Buckling beam problem
+
 ## Quantum mechanics eigenvalue calculations
 The investigation of a sufficient amount of integration points, $N$ gave us the plot shown in figure \ref(fig:int-points).
 
