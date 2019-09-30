@@ -49,7 +49,7 @@ We will also compare this to another method called the bisection method.
 
 In this project, we are considering two wave function problems in one dimension. Generally, the differential equation we are to solve can be written like this:
 
-$$-\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho).$$ {#eq:diffeq}
+$$-\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho).$$  {#eq:diffeq}
 
 This equation can be applied to both problems by making $\rho$ and $\lambda$ appropriate scaled values for the system in question.
 
@@ -286,9 +286,9 @@ It is now clear that the eigenvalue solver we made will be able to find these ei
 
 With these eigenvalues it is possible to calculate the energy and position of the electron, but we will not demonstrate that here. We will instead investigate what number of integration points, $N$, and what approximation of infinity we can use to get sufficiently correct eigenvalues.
 
-To do this we fix $\rho_{max} = 10$ and find the average deviation of our calculated ones from the analytical ones for $N = {100, 200, 300, 400}$ and plot the error and time versus the number of integration points. This can be found in the d branch in [_Code/main.cpp_](https://github.com/amundmr/Project-2/blob/d/Code/main.cpp)
+To do this we fix $\rho_{max} = 10$ and find the average deviation of our calculated ones from the analytical ones for $N = {100, 200, 300, 400}$ and plot the error and time versus the number of integration points. This can be found in the project repository in [_/Code/Quantum-case/main.cpp_](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main.cpp)
 
-Then we fix the number of integration points to $N = 200$ and calculate the average error for the approximations $\rho_{max} = {4, 5, 6, 7, 8, 9, 10, 11}$ and plot the error and time versus the approximation of $\rho_{max}$. This can be found in the d branch in [_Code/main_rho.cpp_](https://github.com/amundmr/Project-2/blob/d/Code/main_rho.cpp)
+Then we fix the number of integration points to $N = 200$ and calculate the average error for the approximations $\rho_{max} = {4, 5, 6, 7, 8, 9, 10, 11}$ and plot the error and time versus the approximation of $\rho_{max}$. This can be found in the project repository in [_/Code/Quantum-case/main_rho.cpp_](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main_rho.cpp)
 
 
 # Results
