@@ -49,31 +49,27 @@ int main(){
   int N = 10000;
   double start = -10.0, end = 10.0;
   double h = (end-start)/N;
+  //timing for comparason
 
+  clock_t t0,t1;
+  t0 = clock();
   for (int i=0; i<N; i++){
     double a = i*h;
     double b = h*(i+1);
-
     bisection(a,b,n);
-
-    clock_t t0,t1;
-    t0 = clock();
-    vec bisec_eigvals = bisection(a,b,n);
-    t1 = clock();
   }
+    t1 = clock();
+    double t_bisec = (double (t1 - t0))/CLOCKS_PER_SEC;
 
   mat A(n,n, fill::zeros);
   A.diag() += 2;
   A.diag(-1) -= 1;
   A.diag(1) -= 1;
 
-
-  double t_bisec = (double (t1 - t0))/CLOCKS_PER_SEC;	// Time spent on arma's eigenvalue solver.
-
+//timing to compare bisection with jacobi
   t0 = clock();
   vec eigvals = Jacobi_method(A, n);
   t1 = clock();
-
   double t_jacobi = (double (t1- t0)) /CLOCKS_PER_SEC;	// Time spent on our eigenvalue solver.
 
 
