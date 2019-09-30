@@ -42,4 +42,11 @@ int main(){
 	cout << "Eigenvalues from our Jacobi solver: " << endl;
 	cout << sort(eigvals) << endl;
 	cout << "Time spent on our solver: " << t_jacobi << "s" << endl;
+
+	vec lambda = zeros<vec>(n);
+	for (int i=0; i<n; i++){
+		lambda(i)=2-2*cos((i+1)*M_PI/(n+1));
+	}
+	cout << "------------------------------------" << endl;
+	cout << "Analytical values: " << endl << lambda << endl;
 }
