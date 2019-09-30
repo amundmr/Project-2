@@ -43,14 +43,14 @@ void bisection(double a, double b, int n){
 }
 
 int main(){
-  int n = 10;
-  int N = 100;
-  double start = -1.0, end = 1.0;
+  int n = 20;
+  int N = 10000;
+  double start = -10.0, end = 10.0;
   double h = (end-start)/N;
 
   for (int i=0; i<N; i++){
     double a = i*h;
-    double b = i*(h+1);
+    double b = h*(i+1);
 
     bisection(a,b,n);
   }
