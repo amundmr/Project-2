@@ -1,7 +1,6 @@
 #include <iostream>
 #include <math.h>   //fabs()
 #include <armadillo>
-#include <iomanip>
 
 using namespace std;
 using namespace arma;
@@ -14,6 +13,7 @@ vec f(double x)  //defining function
   vec p = zeros<vec>(n);
   p[1] = 1;
   p[0] = 0;
+<<<<<<< HEAD
   for (int i = 2; i <= n ; ++i)
   {
   p[i] = (diag - x) * (p[i-1]) - (nondiag * nondiag * (p[i-2]));
@@ -21,7 +21,7 @@ vec f(double x)  //defining function
   return p;
 }
 
-double bisection(double a, double b, int n)
+double bisection(double a, double b)
 {
   double c, epsilon = 1E-9, root, fa_i, fb_i, fc_i;
   int i;
@@ -81,6 +81,36 @@ double bisection(double a, double b, int n)
 int main()
 {
   double a = 0.0, b = 1.0;
-  int n = 10;
-  bisection(a,b,n);
+  int n = 100;
+  bisection(a,b);
 }
+=======
+
+void bisection(double a, double b){
+  double c, epsilon = 1e-8, root, fa, fb, fc;
+  if ((f(a) * f(b)) > 0){ // Root not in interval, don't do anything
+  }
+  else{
+    while (fabs(b - a) >= epsilon){
+      c = (a + b) /2.0;
+
+      // If there's no root between a and c, set a=c
+      if (f(a)*f(c) > 0){
+        a = c;
+      }
+      // If there's a root between a and c, set a=b
+      else{
+        b = c;
+      }
+    }
+    cout <<"Root found: " << c << endl;
+  }
+}
+
+int main(){
+  int N = 1000;
+    double a = 0.0, b = 1.0;
+    bisection(a,b);
+
+}
+>>>>>>> 5e88b130696d458ad37dc4c018da9ed1e25cc816
