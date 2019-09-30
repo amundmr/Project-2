@@ -5,97 +5,32 @@
 using namespace std;
 using namespace arma;
 
-vec f(double x); //declearing function
-vec f(double x)  //defining function
+double f(double x, int n)  //defining function
 {
-  double pi, diag = 2.0, nondiag = -1.0;
-  double n = 10;
+  double f, diag = 2.0, nondiag = -1.0;
   vec p = zeros<vec>(n);
-  p[1] = 1;
-  p[0] = 0;
-<<<<<<< HEAD
-  for (int i = 2; i <= n ; ++i)
-  {
-  p[i] = (diag - x) * (p[i-1]) - (nondiag * nondiag * (p[i-2]));
+  
+  p(0) = 1;
+  p(1) = diag - x;
+
+  for (int i=2; i<n; i++){
+    p(i) = (diag-x)*p(i-1)-pow(nondiag,2)*p(i-2);
+    f = p(i);
   }
-  return p;
+
+  return f;
 }
 
-double bisection(double a, double b)
-{
-  double c, epsilon = 1E-9, root, fa_i, fb_i, fc_i;
-  int i;
-  vec fa, fb, fc;
-
-  c = (a + b) /2.0;
-  fc[0] = f(c);
-  fb = f(b);
-  fa = f(a);
-
-  for (int i = 2; i <= 4; i++)
-  {
-
-    fa_i = fa[i];
-    fb_i = fb[i];
-    //fc_i = fc[i];
-
-    cout <<"fa: [" << fa <<" ]"<<endl;
-    cout <<"fai: " << fa_i <<endl;
-    cout <<"fb: " << fb <<endl;
-    cout <<"fbi: " << fb_i <<endl;
-
-    cout<<setw(12)<<"a"<<setw(18)<<"b"<<setw(18)<<"f(c)"<<setw(18)<<"|a-b|"<<endl;
-
-    if ((fa_i * fb_i) > 0)         //root not in intervall
-    {
-      cout << "No roots in intervall [" <<a<< " , "<< b << "]"<<endl;
-    }
-    while (fabs(b - a) >= epsilon)
-    {
-      //cout<<setw(18)<<a<<setw(18)<<b<<setw(18)<<fc_i<<setw(18)<<fabs(a-b)<<endl;
-
-      if (fc == 0.0)
-      {
-        cout <<"Root is: " << c << endl;
-        return 0;
-      }
-
-      if (fa_i*fc > 0)        //no root between a and c
-      {
-        a = c;
-      }
-      else              //Root lies here.
-      {
-        b = c;
-      }
-    }
-    cout << "The root for f(c) " << f(c) << " is " << c << endl;
-  }
-}
-
-
-
-
-
-
-int main()
-{
-  double a = 0.0, b = 1.0;
-  int n = 100;
-  bisection(a,b);
-}
-=======
-
-void bisection(double a, double b){
+void bisection(double a, double b, int n){
   double c, epsilon = 1e-8, root, fa, fb, fc;
-  if ((f(a) * f(b)) > 0){ // Root not in interval, don't do anything
+  if ((f(a,n) * f(b,n)) > 0){ // Root not in interval, don't do anything
   }
   else{
     while (fabs(b - a) >= epsilon){
       c = (a + b) /2.0;
 
       // If there's no root between a and c, set a=c
-      if (f(a)*f(c) > 0){
+      if (f(a,n)*f(c,n) > 0){
         a = c;
       }
       // If there's a root between a and c, set a=b
@@ -108,9 +43,15 @@ void bisection(double a, double b){
 }
 
 int main(){
-  int N = 1000;
-    double a = 0.0, b = 1.0;
-    bisection(a,b);
+  int n = 10;
+  int N = 100;
+  double start = -1.0, end = 1.0;
+  double h = (end-start)/N;
 
+  for (int i=0; i<N; i++){
+    double a = i*h;
+    double b = i*(h+1);
+
+    bisection(a,b,n);
+  }
 }
->>>>>>> 5e88b130696d458ad37dc4c018da9ed1e25cc816
