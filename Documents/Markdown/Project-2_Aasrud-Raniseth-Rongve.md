@@ -217,11 +217,11 @@ $$
 \mathbf u =\begin{bmatrix}
     u_1 \\   u_2 \\ u_3 \\  \dots \\ u_{N-2} \\ u_{N-1}
 \end{bmatrix}
-$$
+$$ {#eq:tridiag}
 
 The endpoints, $u_0$ and $u_N$, are not included. The diagonal $d = \frac{2}{h^2}$ and the non-diagonal $a = -\frac{1}{h^2}$.
 
-Now we can solve our equation numerically using Jacobi's method and compare with the analytical eingenvalues:
+Now we can solve our equation numerically using Jacobi's method and compare with the analytical eigenvalues:
 
 $$
 \lambda_i = d + 2a \cos (\frac{j \pi}{N+1}) \qquad j = 1, 2, \dots, N.
@@ -232,14 +232,13 @@ $$ {#eq:two}
 In order to solve equation @eq:one we implement Jacobi's rotation algorithm. In our Jacobi method we define the following:
 
 $$
-\tan\theta = t = s/c\\
-s = \sin\theta\\
-c = cos \theta \\
-\cot 2\theta = \tau = \frac{a_{ll}-a_{kk}}{2a_{kl}}
+\tan\theta = t = s/c,\\
+s = \sin\theta,\\
+c = cos \theta,\\
+\cot 2\theta = \tau = \frac{a_{ll}-a_{kk}}{2a_{kl}}.
 $$
 
-We define $\theta$ so all non diagnoal elements of the transformed matrix become non-zero.
-Since
+We define $\theta$ so all non diagonal elements of the transformed matrix become zero. Since
 
 $$\cot2\theta = \frac{1}{2}(\cot\theta-\tan\theta)\\$$
 
@@ -254,9 +253,11 @@ $$c = \frac{1}{\sqrt{1+t^2}} \quad \textrm{and} \quad s= tc$$
 
 kilde til oppgave 2 a): http://www.math.harvard.edu/archive/21b_spring_08/handouts/orthomatrix.pdf
 
-## Our method applied
+## 3.4 Our method applied
 
-The compact discretized Schroedinger equation will be
+To solve the buckling beam problem, the approach is quite straight forward. Our solver finds the eigenvalues $\lambda$, which gives the values of interest.
+
+For the quantum dots, however, some modification is necessary. The compact discretized Schroedinger equation will be
 
 $$
   -\frac{u_{i+1} - 2u_i + u_{i-1}}{h^2} + V_i u_i = \lambda u_i,
@@ -290,11 +291,19 @@ To do this we fix $\rho_{max} = 10$ and find the average deviation of our calcul
 
 Then we fix the number of integration points to $N = 200$ and calculate the average error for the approximations $\rho_{max} = {4, 5, 6, 7, 8, 9, 10, 11}$ and plot the error and time versus the approximation of $\rho_{max}$. This can be found in the project repository in [_/Code/Quantum-case/main_rho.cpp_](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main_rho.cpp)
 
+## Using bisection
+
+Bisection is a method of finding the roots of a polynomial. As an alternative to the Jacobi method, we generate the characteristic polynomial $P_A$ of the tridiagonal matrix in question and find the roots of it. These are the eigenvalues we seek. With the tridiagonal matrix defined in eq. (@eq:tridiag), $P_{A,n}$ is the characteristic polynomial of a matrix of size $n$.
+
+$$
+  P_{A,n}(\lambda)=(d-\lambda)P_{A,n-1}(\lambda)-aP_{A,n-2}(\lambda), \qquad P_{A,0}(\lambda)=1, \qquad P_{A,1}(\lambda)=d-\lambda
+$$
+
+Our approach to finding roots of this polynomial involves testing over several sub-domains $[a,b]$. In every sub-domain we do bisection. This is simply defining a midpoint $c$ and checking which of the domains $[a,c]$ and $[c,b]$ contain a root (if any). If, for example $f(a)*f(c)<0$, we conclude that a root is in $[a,c]$ ($f(a)$ and $f(c)$ have different signs). We obviously also check if $c$ is a root. This procedure is done until we are sufficiently close to the root we are seeking. 
 
 # Results
 
-
-### Quantum mechanics eigenvalue calculations
+## Quantum mechanics eigenvalue calculations
 The investigation of a sufficient amount of integration points, $N$ gave us the plot shown in figure \ref(fig:int-points).
 
 ![Shows time spent and average error vs number of integration points, $N$](../Images/int-points-plot.png)
