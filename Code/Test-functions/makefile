@@ -24,3 +24,6 @@ Jacobi_rotate.o :		../Jacobi_method/Jacobi_rotate.cpp
 
 off.o :		../Jacobi_method/off.cpp
 						${CPPflags} -c ../Jacobi_method/off.cpp
+
+clean:
+						rm -rf *.o test.exe
