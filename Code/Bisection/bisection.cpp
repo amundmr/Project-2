@@ -55,6 +55,26 @@ int main(){
     double b = h*(i+1);
 
     bisection(a,b,n);
+
+    clock_t t0,t1;
+    t0 = clock();
+    vec bisec_eigvals = bisection(a,b,n);
+    t1 = clock();
   }
-  vec eigvals = jacobi_method(A,n);
+
+  mat A(n,n, fill::zeros);
+  A.diag() += 2;
+  A.diag(-1) -= 1;
+  A.diag(1) -= 1;
+
+
+  double t_bisec = (double (t1 - t0))/CLOCKS_PER_SEC;	// Time spent on arma's eigenvalue solver.
+
+  t0 = clock();
+  vec eigvals = Jacobi_method(A, n);
+  t1 = clock();
+
+  double t_jacobi = (double (t1- t0)) /CLOCKS_PER_SEC;	// Time spent on our eigenvalue solver.
+
+
 }
