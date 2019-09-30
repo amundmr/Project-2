@@ -27,20 +27,24 @@ double bisection(double a, double b, int n)
   int i;
   vec fa, fb, fc;
 
+  c = (a + b) /2.0;
+  fc[0] = f(c);
+  fb = f(b);
+  fa = f(a);
+
   for (int i = 2; i <= 4; i++)
   {
-    c = (a + b) /2.0;
-    fa = f(a);
-    fa_i = fa[i];
-    fb = f(b);
-    fb_i = fb[i];
-    fc = f(c);
-    fc_i = fc[i];
 
-    cout <<"fa: " << fa <<endl;
+    fa_i = fa[i];
+    fb_i = fb[i];
+    //fc_i = fc[i];
+
+    cout <<"fa: [" << fa <<" ]"<<endl;
     cout <<"fai: " << fa_i <<endl;
     cout <<"fb: " << fb <<endl;
     cout <<"fbi: " << fb_i <<endl;
+
+    cout<<setw(12)<<"a"<<setw(18)<<"b"<<setw(18)<<"f(c)"<<setw(18)<<"|a-b|"<<endl;
 
     if ((fa_i * fb_i) > 0)         //root not in intervall
     {
@@ -48,15 +52,15 @@ double bisection(double a, double b, int n)
     }
     while (fabs(b - a) >= epsilon)
     {
-      //cout<<setw(18)<<a<<setw(18)<<b<<setw(18)<<fc<<setw(18)<<fabs(a-b)<<endl;
+      //cout<<setw(18)<<a<<setw(18)<<b<<setw(18)<<fc_i<<setw(18)<<fabs(a-b)<<endl;
 
-      if (fc_i == 0.0)
+      if (fc == 0.0)
       {
         cout <<"Root is: " << c << endl;
-        //return 0;
+        return 0;
       }
 
-      if (fa_i*fc_i > 0)        //no root between a and c
+      if (fa_i*fc > 0)        //no root between a and c
       {
         a = c;
       }
@@ -71,7 +75,6 @@ double bisection(double a, double b, int n)
 
 
 
-    //cout<<setw(12)<<"a"<<setw(18)<<"b"<<setw(18)<<"f(c)"<<setw(18)<<"|a-b|"<<endl;
 
 
 
