@@ -14,42 +14,65 @@ header-includes: |
   \rfoot{\thepage}
 ---
 
-#1. Abstract
+# 1. Abstract
 First study a buckling beam problem  as a classical wave function problem in one dimension. Thereafter we extend the problem to quantum mechanics where electrons move in a three dimensional harmonic oscillator potential.  
 
+<!-- TODO: Jacobi vs.  bisection -->
 
-Finding that.... Jacobi vs.  bisection
-
-- Importance of scaling equations?
--
+<!-- TODO: Importance of scaling equations? -->
 
 # 2. Introduction
-This project aims to look at different methods for solving eigenvalue problems, all widely used with the purpose of making it possible to solve complex equations in for example quantum physics, as we will discover later in this project.
+This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics. In this project we will also explore the eigenvalue solver's value specifically, with a quantum mechanics problem.
+<!--TODO: Outline the problem briefly-->
 
 We will solve the following equation:
 
+$$-\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho)$$ 
+
+where $\rho$ and $\lambda$ are the scaled values from a given differential equation representing a physical system.
+<!-- TODO: Jacobi's method -->
+
+<!-- TODO: Scaling functions and quantum case -->
+
+<!-- TODO: Bisection method -->
+
+
+
+# 3. Theory and technicalities
+
+# 3.1 The problem
+
+In this project, we are considering two wave function problems in one dimension. Generally, the differential equation we are to solve can be written like this:
+
 $$
-\begin{equation}
-\label{eq:1}
-\tag{1}
-\mathbf{Au = u},
-\end{equation}
+  -\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho).\ \ \ (1)
+$$
+<!-- TODO: Her må vi kanskje få fiksa ordentlig nummerering av likningene? Vet det fins en pandoc-plugin som gjør dette -->
+This equation can be applied to both problems by making $\rho$ and $\lambda$ appropriate scaled values for the system in question. 
+
+For the buckling beam, $u(x)$ is the displacement in the y-direction. With the length of the beam being $L$, we say that the scaled value $\rho=\frac{x}{L}$, where $x\in[0,L]$ is the distance along the beam. The variable $\rho$ is now defined in $[0,1]$ with boundary conditions for the scaled function $u(\rho)$, $u(0)=u(1)=0$ - nice and general.
+
+<!-- TODO: Scaled values for quantum and buckling beam problem. -->
+
+# 3.2 Orthogonal transformations
+
+An orthogonal matrix $\mathbf{Q}$ has this property:
+
+$$
+  \mathbf{Q}^T\mathbf{Q}=\mathbb{I}\Rightarrow \mathbf{Q}^T=\mathbf{Q}^{-1}
 $$
 
+where $\mathbb{I}$ is the identity.
 
-- Jacobi's method
-
-- lapack
-
-- Bisection method(if we choose not go in the quantum mechanical direction)
-
-
-
-#3. Method
 ## 3.1 Jacobi's method
-The Jacobi methods is a widely used iterative solver  and used a great deal when solving partial differential equations.
 
-The aimn is to
+The Jacobi eigenvalue method is an iterative method for finding eigenvalues. It is based on the idea of doing a number of orthogonal basis transformations on the matrix in question, with the goal of diagonalizing it.
+
+$$
+  \mathbf{Q}_n^T\mathbf{Q}_{n-1}^T...\mathbf{Q}_1^T\mathbf{A}\mathbf{Q}_1...\mathbf{Q}_{n-1}\mathbf{Q}_n=\mathbf{D},
+$$
+
+where $\mathbf{A}$ is the starting matrix, $\mathbf{Q}_i$ are orthogonal matrices and $\mathbf{D}$ is diagonal, containing the eigenvalues.
 
 ---
 
