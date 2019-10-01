@@ -17,9 +17,9 @@ header-includes: |
 # 1. Abstract
 This paper first solves a buckling beam problem as a classical wave function problem in one dimension. Thereafter we extend the problem to quantum mechanics where electrons move in a three dimensional harmonic oscillator potential. We solve these problems as an eigenvalue problem with three different methods; the Jacobi method, the bisection method and Armadillos eigenvalue solver.
 
-Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than 200 x 200, though having an increasing precision when increasing the size(seen in int-points-plot.png). The bisection is a really simple and efficient method with a set precision. On the other hand it will not find the eigenvectors. Compared to Jacobi it was found to be about 530 times faster(0.14 seconds for Bisection and 86 seconds for Jacobi) for a 200 x 200 matrix.
+Our algorithm for Jacobi is rather inefficient when dealing with large matrices, though having an increasing precision when increasing the size(seen in 4.2 Quantum mechanics eigenvalue calculations). The bisection method is a simple and efficient method with a set precision. Compared to the Jacobi method it was found to be about 530 times faster(0.14 seconds for Bisection and 86 seconds for Jacobi) for a 200 x 200 matrix.
 
-Scaling of the equations in order to make them dimensionless is an important part of this project. One reason is to reduce numerical error(round off) when e.g. adding or subtracting small numbers many times. It also makes the behavior of the system more general.
+Scaling the equations in order to make them dimensionless is an important part of this project. One reason is to reduce numerical error(round off) when e.g. adding or subtracting small numbers many times. It also makes the behavior of the system more general.
 
 
 # 2. Introduction
@@ -31,12 +31,7 @@ $$
 -\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho)
 $$
 
-where $\rho$ and $\lambda$ are the scaled values from a given differential equation representing a physical system.
-<!-- TODO: Jacobi's method -->
-
-<!-- TODO: Scaling functions and quantum case -->
-
-<!-- TODO: Bisection method -->
+where $\rho$ and $\lambda$ are the scaled values from a given differential equation representing a physical system. 
 
 The eigenvalue algorithm mainly explored in this paper is the Jacobi eigenvalue algorithm first proposed by Carl Gustav Jacob Jacobi. He proposed this algorithm already in 1846 [@Jacobi], but it only became widely used with the rise of the computer in the 1950s.
 
@@ -55,20 +50,19 @@ This equation can be applied to both problems by making $\rho$ and $\lambda$ app
 
 ### Buckling beam
 
-<!-- TODO: More on the buckling beam problem -->
-
 For the buckling beam, we are solving this differential equation:
 
 $$\gamma d^2 \frac{u(x)}{dx^2} = -F u(x),$$ {#eq:bucklingbeam}
 
 where
+
 - the length of the beam is $L$.
 - $x\in[0,L]$ denotes the distance along the beam.
 - $u(x)$ is the vertical displacement in y -direction.
 
 $\gamma$, F and L are known variables. We say that the scaled value $\rho=\frac{x}{L}$,making the variable $\rho$ defined in $[0,1]$. The boundary conditions for the scaled function $u(\rho)$ are now $u(0)=u(1)=0$ - nice and general.
 
-We can now rewrite @eq:bucklingbeam as:
+We can now rewrite (@eq:bucklingbeam) as:
 
 $$
 -\frac{d^2 u(\rho)}{d\rho^2}=\lambda  u(\rho), \qquad \lambda = \frac{FL^2}{R}.
@@ -223,7 +217,7 @@ $$ {#eq:two}
 
 <!-- Oppgave 2b) -->
 
-In order to solve equation @eq:one we implement Jacobi's rotation algorithm. In our Jacobi method we define the following:
+In order to solve equation (@eq:one) we implement Jacobi's rotation algorithm. In our Jacobi method we define the following:
 
 $$
 \tan\theta = t = s/c,\\
@@ -242,10 +236,6 @@ giving
 $$t = -\tau \pm \sqrt{1+\tau^2}.$$
 Then
 $$c = \frac{1}{\sqrt{1+t^2}} \quad \textrm{and} \quad s= tc$$
-
-
-
-kilde til oppgave 2 a): http://www.math.harvard.edu/archive/21b_spring_08/handouts/orthomatrix.pdf
 
 ## 3.4 Our method applied
 
@@ -281,9 +271,9 @@ It is now clear that the eigenvalue solver we made will be able to find these ei
 
 With these eigenvalues it is possible to calculate the energy and position of the electron, but we will not demonstrate that here. We will instead investigate what number of integration points, $N$, and what approximation of infinity we can use to get sufficiently precise eigenvalues.
 
-To do this we fix $\rho_{max} = 10$ and find the average deviation of our calculated eigenvalues from the analytical eigenvalues, for $N = {100, 200, 300, 400}$. We thereafter plot the error and time versus the number of integration points. This can be found in the project repository in [/Code/Quantum-case/main.cpp](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main.cpp)
+To do this we fix $\rho_{max} = 10$ and find the average deviation of our calculated eigenvalues from the analytical eigenvalues, for $N = {100, 200, 300, 400}$. We thereafter plot the error and time versus the number of integration points. This can be found in the project repository in [`/Code/Quantum-case/main.cpp`](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main.cpp)
 
-Then we fix the number of integration points to $N = 200$ and calculate the average error for the approximations $\rho_{max} = {4, 5, 6, 7, 8, 9, 10, 11}$ and plot the error and time versus the approximation of $\rho_{max}$. This can be found in the project repository in [/Code/Quantum-case/main_rho.cpp](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main_rho.cpp)
+Then we fix the number of integration points to $N = 200$ and calculate the average error for the approximations $\rho_{max} = {4, 5, 6, 7, 8, 9, 10, 11}$ and plot the error and time versus the approximation of $\rho_{max}$. This can be found in the project repository in [`/Code/Quantum-case/main_rho.cpp`](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main_rho.cpp)
 
 ## 3.5 Using bisection
 
@@ -293,13 +283,13 @@ $$
   P_{A,n}(\lambda)=(d-\lambda)P_{A,n-1}(\lambda)-aP_{A,n-2}(\lambda), \qquad P_{A,0}(\lambda)=1, \qquad P_{A,1}(\lambda)=d-\lambda
 $$
 
-Our approach to finding roots of this polynomial involves testing over several sub-domains $[a,b]$. In every sub-domain we do bisection. This is simply defining a midpoint $c$ and checking which of the domains $[a,c]$ and $[c,b]$ contain a root (if any). If, for example $f(a)*f(c)<0$, we conclude that a root is in $[a,c]$ ($f(a)$ and $f(c)$ have different signs). We obviously also check if $c$ is a root. This procedure is done until we are sufficiently close to the root we are seeking. @Hjorth-Jensen2010
+Our approach to finding roots of this polynomial involves testing over several sub-domains $[a,b]$. In every sub-domain we do bisection. This is simply defining a midpoint $c$ and checking which of the domains $[a,c]$ and $[c,b]$ contain a root (if any). If, for example $f(a)*f(c)<0$, we conclude that a root is in $[a,c]$ ($f(a)$ and $f(c)$ have different signs). We obviously also check if $c$ is a root. This procedure is done until we are sufficiently close to the root we are seeking (@Hjorth-Jensen2010).
 
 # 4. Results
 
 ## 4.1 Buckling beam problem
 
-Our program [*/Code/Buckling_beam/*](https://github.com/amundmr/Project-2/tree/master/Code/Buckling_beam) gives these eigenvalues for a matrix of size $N=10$:
+Our program [`/Code/Buckling_beam/`](https://github.com/amundmr/Project-2/tree/master/Code/Buckling_beam) gives these eigenvalues for a matrix of size $N=10$:
 
 ```
 0.0810
@@ -314,15 +304,15 @@ Our program [*/Code/Buckling_beam/*](https://github.com/amundmr/Project-2/tree/m
 3.9190
 ```
 
-These correspond both with the eigenvalues from armadillos diagonalizer and with the analytical ones. Time spent on the different solvers as well as the maximum non-diagonal element and number of rotations can be found by running the program [main.exe](https://github.com/amundmr/Project-2/blob/master/Code/Buckling_beam/main.exe).
+These correspond both with the eigenvalues from armadillos diagonalizer and with the analytical ones. Time spent on the different solvers as well as the maximum non-diagonal element and number of rotations can be found by running the program [`main.exe`](https://github.com/amundmr/Project-2/blob/master/Code/Buckling_beam/main.exe).
 
-## 4.2 Quantum mechanics eigenvalue calculations
+## 4.2 Quantum mechanics eigenvalue calculations {#sec:quant-result}
 
-The investigation of a sufficient amount of integration points $N$, with the program in [/Code/Quantum-case/](https://github.com/amundmr/Project-2/tree/master/Code/Quantum-case), gave us the plot shown in figure @fig:qfig1.
+The investigation of a sufficient amount of integration points $N$, with the program in [`/Code/Quantum-case/`](https://github.com/amundmr/Project-2/tree/master/Code/Quantum-case), gave us the plot shown in figure @fig:qfig1 on the next page.
 
 ![Shows time spent and average error vs number of integration points, $N$](../Images/int-points-plot.png){#fig:qfig1}
 
-The investigation of the best approximation to infinity gave us the plot shown in figure @fig:qfig2.
+The investigation of the best approximation to infinity gave us the plot shown in figure @fig:qfig2 on page 10.
 
 ![Shows time spent and average error vs approximation of infinity](../Images/rho_approx_plot.png){#fig:qfig2}
 
@@ -330,7 +320,7 @@ It is also worth noting that all these graphs are reproducible, except the time 
 
 ## 4.3 Jacobi v. bisection
 
-The program in [/Code/Bisection/](https://github.com/amundmr/Project-2/tree/master/Code/Bisection) compares the speed of the Jacobi method against finding the eigenvalues as roots of the characteristic polynomial with bisection. With $N=200$, we get these quite staggering results:
+The program in [`/Code/Bisection/`](https://github.com/amundmr/Project-2/tree/master/Code/Bisection) compares the speed of the Jacobi method against finding the eigenvalues as roots of the characteristic polynomial with bisection. With $N=200$, we get these quite staggering results:
 
 ```
 Time spent on bisection method: 0.140625 s
@@ -342,7 +332,7 @@ Even though $N=200$ is quite a realistic number of steps (maybe even a bit few, 
 # 5. Discussion
 
 ## 5.2 Quantum mechanics eigenvalue calculations
-From the figures(@fig:qfig1, @fig:qfig1) presented in the results we see that while a higher number of integration points yields better results, though also rapidly increasing time.
+From the figures (@fig:qfig1 and @fig:qfig2) presented in the results we see that while a higher number of integration points yields better results, though also rapidly increasing time.
 
 With the changing of $\rho_{max}$ we see that first the error decreases, but after $\rho_{max} = 5$ we actually start to see an increase in error again. This might be because a higher $\rho_{max}$ gives a bigger step-size which again gives lower numbers on the off-diagonal elements, which in turn yields fewer Jacobi rotations before the off-diagonal elements are below the tolerance for being called zero.
 
@@ -355,7 +345,7 @@ The time spent on the calculations seem pretty random and that is probably becau
 
 # Appendix
 
-[GitHub Repository](https://github.com/amundmr/Project-2) - The source code and all the executables are in the folder [/Code/](https://github.com/amundmr/Project-2/tree/master/Code).
+[`GitHub Repository`](https://github.com/amundmr/Project-2) - The source code and all the executables are in the folder [`/Code/`](https://github.com/amundmr/Project-2/tree/master/Code).
 
 # References
 {#refs}
