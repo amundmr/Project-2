@@ -4,7 +4,7 @@ author:
   - Knut Magnus Aasrud
   - Anna Stray Rongve
   - Amund Midtgard Raniseth
-date: 30 September 2019
+date: 1 Oktober 2019
 header-includes: |
   \usepackage{fancyhdr}
   \pagestyle{fancy}
@@ -17,18 +17,15 @@ header-includes: |
 # 1. Abstract
 First study a buckling beam problem  as a classical wave function problem in one dimension. Thereafter we extend the problem to quantum mechanics where electrons move in a three dimensional harmonic oscillator potential.  
 
-The problem is solved as an eigenvalue problem by two ? different methods, the Jacobi method and the bisection method. Choosing the approach with bisection due to a greater interest in the mathematics rather than the quantum physic's.
+The problem is solved as an eigenvalue problem with three different methods; the Jacobi method, the bisection method and Armadillos eigenvalue solver. Choosing the approach with bisection due to a greater interest in the mathematics rather than the quantum physic's.
 
-Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than ............. The bisection is a really simple and efficient method for finding eigenvalues with a set precision. On the other hand it will not produce /find the eigenvectors. 
-
-<!-- TODO: Jacobi vs.  bisection -->
+Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than 200 x 200, though having an increasing precision when increasing the size(seen in int-points-plot.png). The bisection is a really simple and efficient method with a set precision. On the other hand it will not find the eigenvectors. Compared to Jacobi it was found to be about 530 % faster(0.14 seconds for Bisection and 86 seconds for Jacobi) for a 200 x 200 matric.
 
 <!-- TODO: Importance of scaling equations? -->
 
-<!-- TODO: State some numerical results - how much more efficient is the different methods compared to each oter? -->
 
 # 2. Introduction
-This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics. In this project we will also explore the eigenvalue solver's value specifically, with a classical case - the buckling beam problem - and a quantum case - electrons as quantum dots.
+This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics, especially when solving differential equations. In this project we will also explore the eigenvalue solver's value specifically, with a classical case - the buckling beam problem - and a quantum case - electrons as quantum dots.
 
 We will solve the following equation:
 
@@ -43,7 +40,7 @@ where $\rho$ and $\lambda$ are the scaled values from a given differential equat
 
 <!-- TODO: Bisection method -->
 
-The eigenvalue algorithm mainly explored in this paper is the Jacobi eigenvalue algorithm first proposed by Carl Gustav Jacob Jacobi. He proposed this algorithm already in 1846 [@Jacobi], but it only became widely used with the rise of the computer in the 1950s. 
+The eigenvalue algorithm mainly explored in this paper is the Jacobi eigenvalue algorithm first proposed by Carl Gustav Jacob Jacobi. He proposed this algorithm already in 1846 [@Jacobi], but it only became widely used with the rise of the computer in the 1950s.
 
 In addition to the Jacobi method for eigenvalues, we will also compare this to a somewhat simpler method. This utilizes bisection to find the roots corresponding to the eigenvalues, which should be more effective.
 
@@ -143,7 +140,7 @@ $$
 
 where $\mathbb{I}$ is the identity.
 
-Unitary transformations are key to the method we are implementing, so we need to make sure that it preserves the orthogonality eigenvectors we apply it on. Our starting basis being orthogonal is more formally written like this:
+Unitary transformations are key to the method we are implementing, so we need to make sure that they preserve the orthogonality of the eigenvectors we apply it on. Our starting basis being orthogonal is more formally written like this:
 
 $$
   \mathbf{v}_j^T \mathbf v_i = \delta_{ij}.
@@ -155,13 +152,7 @@ $$
   \mathbf{w}_i=\mathbf{Qv}_i.
 $$
 
-Multiplying the above equation from the left with
-
-$$
-  \mathbf{w}_j^T=(\mathbf{Q} \mathbf{v}_j)^T
-$$
-
-we get
+Multiplying the above equation from the left with $\mathbf{w}_j^T=(\mathbf{Q} \mathbf{v}_j)^T$, we get
 
 $$
   \mathbf{w}_j^T\mathbf{w_i}=(\mathbf{Q} \mathbf{v}_j)^T \mathbf{Qv}_i\\
@@ -189,7 +180,7 @@ $$
 
 where $\mathbf{A}$ is the starting matrix, $\mathbf{Q}_i$ are unitary matrices and $\mathbf{D}$ is diagonal, containing the eigenvalues.
 
-Quickly jumping back to our original differential equation @eq:diffeq, we first discretize it:
+Quickly jumping back to our original differential equation (@eq:diffeq), we first discretize it:
 
 $$
   -\frac{u(\rho_i + h) - 2 u(\rho_i) + u(\rho_i - h)}{h^2}  = \lambda u(\rho_i),
@@ -201,7 +192,7 @@ $$
   -\frac{u_{i+1} - 2 u_i + u_{i-1}}{h^2}  = \lambda u_i.
 $$
 
-The set of all equations from $u_0$ to $u_N$ can be written as the eigenvalue equation:
+The set of all equations from $u_1$ to $u_{N-1}$ can be written as the eigenvalue equation (the endpoints, $u_0$ and $u_N$, are not included):
 
 $$
 \mathbf{Au = \lambda u}.
@@ -224,7 +215,7 @@ $$
 \end{bmatrix}
 $$ {#eq:tridiag}
 
-The endpoints, $u_0$ and $u_N$, are not included. The diagonal $d = \frac{2}{h^2}$ and the non-diagonal $a = -\frac{1}{h^2}$.
+The diagonal $d = \frac{2}{h^2}$ and the non-diagonal $a = -\frac{1}{h^2}$.
 
 Now we can solve our equation numerically using Jacobi's method and compare with the analytical eigenvalues:
 
@@ -288,15 +279,15 @@ $$
 $$
 with the diagonal elements $d_i = \frac{2}{h^2} + V_i$ and the non-diagonal elements $e_i = -\frac{1}{h^2}$.
 
-It is now clear that the eigenvalue solver we made will be able to find these eigenvalues. However it will have to be tweaked by finding a sufficient number of integration points, $N$ and an approximation of $\rho_{max}$ to infinity that yields eigenvalues close enough to the analytical ones of which the first four is $\lambda = 3,7,11,15$.
+It is now clear that the eigenvalue solver we made will be able to find these eigenvalues. However it will have to be tweaked by finding a sufficient number of integration points, $N$ and an approximation of $\rho_{max}$ to infinity that yields eigenvalues close enough to the analytical ones of which the first four are $\lambda = 3,7,11,15$.
 
 With these eigenvalues it is possible to calculate the energy and position of the electron, but we will not demonstrate that here. We will instead investigate what number of integration points, $N$, and what approximation of infinity we can use to get sufficiently correct eigenvalues.
 
-To do this we fix $\rho_{max} = 10$ and find the average deviation of our calculated ones from the analytical ones for $N = {100, 200, 300, 400}$ and plot the error and time versus the number of integration points. This can be found in the project repository in [_/Code/Quantum-case/main.cpp_](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main.cpp)
+To do this we fix $\rho_{max} = 10$ and find the average deviation of our calculated eigenvalues from the analytical eigenvalues, for $N = {100, 200, 300, 400}$. We thereafter plot the error and time versus the number of integration points. This can be found in the project repository in [_/Code/Quantum-case/main.cpp_](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main.cpp)
 
 Then we fix the number of integration points to $N = 200$ and calculate the average error for the approximations $\rho_{max} = {4, 5, 6, 7, 8, 9, 10, 11}$ and plot the error and time versus the approximation of $\rho_{max}$. This can be found in the project repository in [_/Code/Quantum-case/main_rho.cpp_](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main_rho.cpp)
 
-## Using bisection
+## 3.5 Using bisection
 
 Bisection is a method of finding the roots of a polynomial. As an alternative to the Jacobi method, we generate the characteristic polynomial $P_A$ of the tridiagonal matrix in question and find the roots of it. These are the eigenvalues we seek. With the tridiagonal matrix defined in eq. (@eq:tridiag), $P_{A,n}$ is the characteristic polynomial of a matrix of size $n$.
 
@@ -306,9 +297,9 @@ $$
 
 Our approach to finding roots of this polynomial involves testing over several sub-domains $[a,b]$. In every sub-domain we do bisection. This is simply defining a midpoint $c$ and checking which of the domains $[a,c]$ and $[c,b]$ contain a root (if any). If, for example $f(a)*f(c)<0$, we conclude that a root is in $[a,c]$ ($f(a)$ and $f(c)$ have different signs). We obviously also check if $c$ is a root. This procedure is done until we are sufficiently close to the root we are seeking. @Hjorth-Jensen2010
 
-# Results
+# 4. Results
 
-## Buckling beam problem
+## 4.1 Buckling beam problem
 
 Our program [*/Code/Buckling_beam/*](https://github.com/amundmr/Project-2/tree/master/Code/Buckling_beam) gives these eigenvalues for a matrix of size $N=10$:
 
@@ -327,7 +318,7 @@ Our program [*/Code/Buckling_beam/*](https://github.com/amundmr/Project-2/tree/m
 
 These correspond both with the eigenvalues from armadillos diagonalizer and with the analytical ones. Time spent on the different solvers as well as the maximum non-diagonal element and number of rotations can be found by running the program [main.exe](https://github.com/amundmr/Project-2/blob/master/Code/Buckling_beam/main.exe).
 
-## Quantum mechanics eigenvalue calculations
+## 4.2 Quantum mechanics eigenvalue calculations
 
 The investigation of a sufficient amount of integration points $N$, with the program in [/Code/Quantum-case/](https://github.com/amundmr/Project-2/tree/master/Code/Quantum-case), gave us the plot shown in figure @fig:qfig1.
 
@@ -339,16 +330,31 @@ The investigation of the best approximation to infinity gave us the plot shown i
 
 It is also worth noting that all these graphs are reproducible, except the time graph of the approximation of $\rho_{max}$ which were very different every time.
 
-# Discussion
+## 4.3 Jacobi v. bisection
 
-## Quantum mechanics eigenvalue calculations
+The program in [*/Code/Bisection/*](https://github.com/amundmr/Project-2/tree/master/Code/Bisection) compares the speed of the Jacobi method against finding the eigenvalues as roots of the characteristic polynomial with bisection. With $N=200$, we get these quite staggering results:
+
+```
+Time spent on bisection method: 0.140625 s
+Time spent on Jacobi method: 86.875 s
+```
+
+Even though $N=200$ is quite a realistic number of steps (maybe even a bit few, in cases), the bisection method blazes ahead.
+
+# 5. Discussion
+
+## 5.2 Quantum mechanics eigenvalue calculations
 From the figures presented in the results we see that while a higher number of integration points yields better results, a big downside is that the time spent also increases.
 
 With the changing of $\rho_{max}$ we see that first the error decreases, but after $\rho_{max} = 5$ we actually start to see an increase in error again. This might be because a higher $\rho_{max}$ gives a bigger step-size which again gives lower numbers on the off-diagonal elements, which in turn yields a lower amount of Jacobi rotations before the off-diagonal elements are below the tolerance for being called zero.
 
 The time spent on the calculations seem pretty random and that is probably because the changing of $\rho_{max}$ doesn't make the computer do any more or less work, it simply changes the numbers. The fluctuations might therefore just be that the computer has different background tasks running at different times.
 
-# Conclusion
+# 6. Conclusion
+
+# Appendix
+
+[GitHub Repository](https://github.com/amundmr/Project-2) - The source code and all the executables are in the folder [/Code/](https://github.com/amundmr/Project-2/tree/master/Code).
 
 # References
 {#refs}
