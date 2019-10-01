@@ -19,13 +19,13 @@ First study a buckling beam problem  as a classical wave function problem in one
 
 The problem is solved as an eigenvalue problem with three different methods; the Jacobi method, the bisection method and Armadillos eigenvalue solver. Choosing the approach with bisection due to a greater interest in the mathematics rather than the quantum physic's.
 
-Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than 200 x 200, though having an increasing precision when increasing the size(seen in int-points-plot.png). The bisection is a really simple and efficient method with a set precision. On the other hand it will not find the eigenvectors. Compared to Jacobi it was found to be about 530 % faster(0.14 seconds for Bisection and 86 seconds for Jacobi) for a 200 x 200 matric.
+Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than 200 x 200, though having an increasing precision when increasing the size(seen in int-points-plot.png). The bisection is a really simple and efficient method with a set precision. On the other hand it will not find the eigenvectors. Compared to Jacobi it was found to be about 530 % faster(0.14 seconds for Bisection and 86 seconds for Jacobi) for a 200 x 200 matrix.
 
 <!-- TODO: Importance of scaling equations? -->
 
 
 # 2. Introduction
-This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics, especially when solving differential equations. In this project we will also explore the eigenvalue solver's value specifically, with a classical case - the buckling beam problem - and a quantum case - electrons as quantum dots.
+This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in many areas of physics, especially when solving differential equations. In this project we will also explore the eigenvalue solver's value specifically, with a classical case - the buckling beam problem - and a quantum case - electrons as quantum dots.
 
 We will solve the following equation:
 
