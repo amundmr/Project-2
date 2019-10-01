@@ -122,7 +122,7 @@ $$
 
 which is solvable by an eigenvalue solver. The difference this time, however, is the added potential $\rho^2u(\rho)$.
 
-## 3.2 Orthogonal transformations
+## 3.2 Unitary transformations
 
 A unitary matrix $\mathbf{Q}$ has this property:
 
@@ -154,7 +154,7 @@ $$
   \mathbf{w}_j^T\mathbf{w_i}=\mathbf{v}_j^T\mathbf{Q}^T \mathbf{Qv}_i\\
 $$
 
-Since $\mathbf{Q^TQ} = \mathbb I$,
+Since $\mathbf{Q^TQ} = \mathbb I$ (unitary matrices are orthogonal as well),
 
 $$
 \mathbf{w}_j^T\mathbf{w_i}  = \mathbf{v}_j^T\mathbf{v_i} = \delta_{ij}.
@@ -237,8 +237,9 @@ $$t = -\tau \pm \sqrt{1+\tau^2}.$$
 Then
 $$c = \frac{1}{\sqrt{1+t^2}} \quad \textrm{and} \quad s= tc$$
 
-At this point we have our sines, cosines, tangens and cotangens, but we still do not have a rotation matrix. The next step is to search our matrix $\bf A$ for the largest element and save its indices. This is done in `/Code/Jacobi_method/off.cpp`. \
-The next step is to use these indices to create our orthogonal transformation matrix $\bf Q$. Then we can multiply our original matrix $\bf A$ from the right with $\bf Q$ and from the left with its transposed $\bf Q^\dagger$. This is done in `/Code/Jacobi_method/Jacobi_rotate.cpp`. We then repeat this process until the largest off-diagonal element is below a set tolerance.
+At this point we have our sines, cosines, tangens and cotangens, but we still do not have a rotation matrix. The next step is to search our matrix $\bf A$ for the largest element and save its indices. This is done in [`/Code/Jacobi_method/off.cpp`](https://github.com/amundmr/Project-2/blob/master/Code/Jacobi_method/off.cpp).
+
+The next step is to use these indices to create our orthogonal transformation matrix $\bf Q$. Then we can multiply our original matrix $\bf A$ from the right with $\bf Q$ and from the left with its transposed $\bf Q^\dagger$. This is done in [`/Code/Jacobi_method/Jacobi_rotate.cpp`](https://github.com/amundmr/Project-2/blob/master/Code/Jacobi_method/Jacobi_rotate.cpp). We then repeat this process until the largest off-diagonal element is below a set tolerance.
 
 ## 3.4 Our method applied
 
@@ -307,7 +308,7 @@ Our program [`/Code/Buckling_beam/`](https://github.com/amundmr/Project-2/tree/m
 3.9190
 ```
 
-These correspond both with the eigenvalues from armadillos diagonalizer and with the analytical ones. Time spent on the different solvers as well as the maximum non-diagonal element and number of rotations can be found by running the program [`main.exe`](https://github.com/amundmr/Project-2/blob/master/Code/Buckling_beam/main.exe).
+These correspond both with the eigenvalues from armadillos diagonalizer and with the analytical ones. The max non-diagonal element after the complete Jacobi method is $9.65129\times 10^{-8}$. Time spent on the different solvers and the number of rotations can be found by running the program [`main.exe`](https://github.com/amundmr/Project-2/blob/master/Code/Buckling_beam/main.exe).
 
 ## 4.2 Quantum mechanics eigenvalue calculations {#sec:quant-result}
 
@@ -336,7 +337,10 @@ Even though $N=200$ is quite a realistic number of steps (maybe even a bit few, 
 
 ## 5.1 Buckling beam
 
+After running our Jacobi solver, the max non-diagonal element of our approximately diagonalized matrix is so adequately small, which fits with the fact that our eigenvalues on the buckling beam problem greatly correspond with both the alternative armadillo-solver as well as the analytical solutions. These results can be scaled back to useful values (something we will not go into here). However, running our solver with more integration points significantly increases the calculation time - to the point where this approach does not seem viable for this type of application.
+
 ## 5.2 Quantum mechanics eigenvalue calculations
+
 From the figures (@fig:qfig1 and @fig:qfig2) presented in the results we see that while a higher number of integration points yields better results, though also rapidly increasing time.
 
 With the changing of $\rho_{max}$ we see that first the error decreases, but after $\rho_{max} = 5$ we actually start to see an increase in error again. This might be because a higher $\rho_{max}$ gives a bigger step-size which again gives lower numbers on the off-diagonal elements, which in turn yields fewer Jacobi rotations before the off-diagonal elements are below the tolerance for being called zero.
@@ -345,15 +349,15 @@ The time spent on the calculations seem pretty random and that is probably becau
 
 ## 5.3 Jacobi v. bisection
 
+The bisection method is more specialized to our specific matrix and therefore outraces the Jacobi method once the number of integration points get larger. However, the Jacobi method might do better with a denser matrix, since the bisection method depends on first finding the characteristic polynomial.
 
 # 6. Conclusion
 
-We found that using Jacobi's method to find eigenvalues was very doable. While the bisection is much faster, it does not give us the opportunity to find eigenvectors. \
+We found that using Jacobi's method to find eigenvalues was very doable. While the bisection is much faster, it does not give us the opportunity to find eigenvectors.
+
 It is also pretty easy to modify an algorithm like this to work for many different scenarios. We demonstrated both a buckling beam and a quantum particle here, which both turned out very good.
 
-## 6.? Future work
-
-If someone were to improve upon these algorithms or apply them to even more scenarios it might be worth investigating if the bisection method is enough for the scenario or if you would actually need the Jacobi method.
+As a method of diagonalization however, there are more effective methods than the Jacobi method. It is too slow and works best as a pedagogic tool.
 
 # Appendix
 
