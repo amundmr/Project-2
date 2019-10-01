@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -larmadillo -llapack -lblas -O3 -std=c++11
+CFLAGS = -std=c++11 -larmadillo -llapack -lblas
 
 main: obj
 	$(CC) $(wildcard *.o) bisection.cpp $(CCFLAGS) -o bisection.exe

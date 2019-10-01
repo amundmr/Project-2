@@ -17,18 +17,15 @@ header-includes: |
 # 1. Abstract
 First study a buckling beam problem  as a classical wave function problem in one dimension. Thereafter we extend the problem to quantum mechanics where electrons move in a three dimensional harmonic oscillator potential.  
 
-The problem is solved as an eigenvalue problem by two ? different methods, the Jacobi method and the bisection method. Choosing the approach with bisection due to a greater interest in the mathematics rather than the quantum physic's.
+The problem is solved as an eigenvalue problem with three different methods; the Jacobi method, the bisection method and Armadillos eigenvalue solver. Choosing the approach with bisection due to a greater interest in the mathematics rather than the quantum physic's.
 
-Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than ............. The bisection is a really simple and efficient method for finding eigenvalues with a set precision. On the other hand it will not produce /find the eigenvectors. 
-
-<!-- TODO: Jacobi vs.  bisection -->
+Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than 200 x 200, though having an increasing precision when increasing the size(seen in int-points-plot.png). The bisection is a really simple and efficient method with a set precision. On the other hand it will not find the eigenvectors. Compared to Jacobi it was found to be about 530 % faster(0.14 seconds for Bisection and 86 seconds for Jacobi) for a 200 x 200 matric.
 
 <!-- TODO: Importance of scaling equations? -->
 
-<!-- TODO: State some numerical results - how much more efficient is the different methods compared to each oter? -->
 
 # 2. Introduction
-This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics. In this project we will also explore the eigenvalue solver's value specifically, with a classical case - the buckling beam problem - and a quantum case - electrons as quantum dots.
+This project aims to look at different numerical methods for solving eigenvalue problems, which is relevant in a lot areas of physics, especially when solving differential equations. In this project we will also explore the eigenvalue solver's value specifically, with a classical case - the buckling beam problem - and a quantum case - electrons as quantum dots.
 
 We will solve the following equation:
 
@@ -43,7 +40,7 @@ where $\rho$ and $\lambda$ are the scaled values from a given differential equat
 
 <!-- TODO: Bisection method -->
 
-The eigenvalue algorithm mainly explored in this paper is the Jacobi eigenvalue algorithm first proposed by Carl Gustav Jacob Jacobi. He proposed this algorithm already in 1846 [@Jacobi], but it only became widely used with the rise of the computer in the 1950s. 
+The eigenvalue algorithm mainly explored in this paper is the Jacobi eigenvalue algorithm first proposed by Carl Gustav Jacob Jacobi. He proposed this algorithm already in 1846 [@Jacobi], but it only became widely used with the rise of the computer in the 1950s.
 
 In addition to the Jacobi method for eigenvalues, we will also compare this to a somewhat simpler method. This utilizes bisection to find the roots corresponding to the eigenvalues, which should be more effective.
 
