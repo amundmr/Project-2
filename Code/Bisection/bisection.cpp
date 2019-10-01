@@ -5,7 +5,7 @@
 using namespace std;
 using namespace arma;
 
-mat Jacobi_method(mat A, int N);
+vec Jacobi_method(mat A, int N);
 
 double f(double x, int n)  //defining function
 {
