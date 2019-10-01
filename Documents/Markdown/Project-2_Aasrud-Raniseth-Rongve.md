@@ -21,7 +21,7 @@ The problem is solved as an eigenvalue problem with three different methods; the
 
 Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than 200 x 200, though having an increasing precision when increasing the size(seen in int-points-plot.png). The bisection is a really simple and efficient method with a set precision. On the other hand it will not find the eigenvectors. Compared to Jacobi it was found to be about 530 times faster(0.14 seconds for Bisection and 86 seconds for Jacobi) for a 200 x 200 matrix.
 
-<!-- TODO: Importance of scaling equations? -->
+Scaling of the equations in order to make them dimensionless is an important part of this project. One reason is to reduce numerical error(round off) when eg. adding or subtracting small numbers many times. It also makes the analyse the behaviour of the system more general.
 
 
 # 2. Introduction
@@ -344,13 +344,16 @@ Even though $N=200$ is quite a realistic number of steps (maybe even a bit few, 
 # 5. Discussion
 
 ## 5.2 Quantum mechanics eigenvalue calculations
-From the figures presented in the results we see that while a higher number of integration points yields better results, a big downside is that the time spent also increases.
+From the figures(@fig:qfig1, @fig:qfig1) presented in the results we see that while a higher number of integration points yields better results, though also rapidly increasing time.
 
-With the changing of $\rho_{max}$ we see that first the error decreases, but after $\rho_{max} = 5$ we actually start to see an increase in error again. This might be because a higher $\rho_{max}$ gives a bigger step-size which again gives lower numbers on the off-diagonal elements, which in turn yields a lower amount of Jacobi rotations before the off-diagonal elements are below the tolerance for being called zero.
+With the changing of $\rho_{max}$ we see that first the error decreases, but after $\rho_{max} = 5$ we actually start to see an increase in error again. This might be because a higher $\rho_{max}$ gives a bigger step-size which again gives lower numbers on the off-diagonal elements, which in turn yields fewer Jacobi rotations before the off-diagonal elements are below the tolerance for being called zero.
 
-The time spent on the $\rho_{max}$ calculation seem pretty random and that is probably because the changing of $\rho_{max}$ doesn't make the computer do substantially more work. The fluctuations might therefore just be because the computer has different background tasks running at different times.
+The time spent on the calculations seem pretty random and that is probably because the changing of $\rho_{max}$ doesn't make the computer do any more or less work, it simply changes the numbers. The fluctuations might therefore just be that the computer has different background tasks running at different times.
+
 
 # 6. Conclusion
+##6.? Future work
+
 
 # Appendix
 
