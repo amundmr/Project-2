@@ -19,7 +19,7 @@ This paper first solves a buckling beam problem as a classical wave function pro
 
 Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than 200 x 200, though having an increasing precision when increasing the size(seen in int-points-plot.png). The bisection is a really simple and efficient method with a set precision. On the other hand it will not find the eigenvectors. Compared to Jacobi it was found to be about 530 times faster(0.14 seconds for Bisection and 86 seconds for Jacobi) for a 200 x 200 matrix.
 
-Scaling of the equations in order to make them dimensionless is an important part of this project. One reason is to reduce numerical error(round off) when eg. adding or subtracting small numbers many times. It also makes the behavior of the system more general.
+Scaling of the equations in order to make them dimensionless is an important part of this project. One reason is to reduce numerical error(round off) when e.g. adding or subtracting small numbers many times. It also makes the behavior of the system more general.
 
 
 # 2. Introduction
