@@ -31,7 +31,7 @@ $$
 -\frac{d^2u(\rho)}{d\rho^2}=\lambda u(\rho)
 $$
 
-where $\rho$ and $\lambda$ are the scaled values from a given differential equation representing a physical system. 
+where $\rho$ and $\lambda$ are the scaled values from a given differential equation representing a physical system.
 
 The eigenvalue algorithm mainly explored in this paper is the Jacobi eigenvalue algorithm first proposed by Carl Gustav Jacob Jacobi. He proposed this algorithm already in 1846 [@Jacobi], but it only became widely used with the rise of the computer in the 1950s.
 
@@ -236,6 +236,9 @@ giving
 $$t = -\tau \pm \sqrt{1+\tau^2}.$$
 Then
 $$c = \frac{1}{\sqrt{1+t^2}} \quad \textrm{and} \quad s= tc$$
+
+At this point we have our sines, cosines, tangens and cotangens, but we still do not have a rotation matrix. The next step is to search our matrix $\bf A$ for the largest element and save its indices. This is done in /Code/Jacobi_method/off.cpp. \
+The next step is to use these indices to create our orthogonal transformation matrix $\bf Q$. Then we can multiply our original matrix $\bf A$ from the right with $\bf Q$ and from the left with its transposed $\bf Q^T$. This is done in /Code/Jacobi_method/Jacobi_rotate.cpp. We then repeat this process until the largest off-diagonal element is below a set tolerance.
 
 ## 3.4 Our method applied
 
