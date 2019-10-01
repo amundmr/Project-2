@@ -1,4 +1,10 @@
 # Project-2
-FYS3150-Computational Physics. Project 2
+FYS3150 - Computational Physics
 
-Report can be found in _Documents_.
+- Anna Stray Rongve
+- Amund Midtgard Raniseth
+- Knut Magnus Aasrud
+
+Report can be found in _/Documents/_.
+
+Source code and executables can be found in */Code/*
