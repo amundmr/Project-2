@@ -15,7 +15,8 @@ header-includes: |
 ---
 
 # 1. Abstract
-First study a buckling beam problem  as a classical wave function problem in one dimension. Thereafter we extend the problem to quantum mechanics where electrons move in a three dimensional harmonic oscillator potential.  
+First study a buckling beam problem  as a classical wave function problem in one dimension. Thereafter we extend the problem to quantum mechanics where electrons move in a three dimensional harmonic oscillator potential.
+
 
 The problem is solved as an eigenvalue problem with three different methods; the Jacobi method, the bisection method and Armadillos eigenvalue solver. Choosing the approach with bisection due to a greater interest in the mathematics rather than the quantum physic's.
 
