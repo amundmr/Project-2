@@ -283,9 +283,9 @@ It is now clear that the eigenvalue solver we made will be able to find these ei
 
 With these eigenvalues it is possible to calculate the energy and position of the electron, but we will not demonstrate that here. We will instead investigate what number of integration points, $N$, and what approximation of infinity we can use to get sufficiently precise eigenvalues.
 
-To do this we fix $\rho_{max} = 10$ and find the average deviation of our calculated eigenvalues from the analytical eigenvalues, for $N = {100, 200, 300, 400}$. We thereafter plot the error and time versus the number of integration points. This can be found in the project repository in [_/Code/Quantum-case/main.cpp_](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main.cpp)
+To do this we fix $\rho_{max} = 10$ and find the average deviation of our calculated eigenvalues from the analytical eigenvalues, for $N = {100, 200, 300, 400}$. We thereafter plot the error and time versus the number of integration points. This can be found in the project repository in [/Code/Quantum-case/main.cpp](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main.cpp)
 
-Then we fix the number of integration points to $N = 200$ and calculate the average error for the approximations $\rho_{max} = {4, 5, 6, 7, 8, 9, 10, 11}$ and plot the error and time versus the approximation of $\rho_{max}$. This can be found in the project repository in [_/Code/Quantum-case/main_rho.cpp_](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main_rho.cpp)
+Then we fix the number of integration points to $N = 200$ and calculate the average error for the approximations $\rho_{max} = {4, 5, 6, 7, 8, 9, 10, 11}$ and plot the error and time versus the approximation of $\rho_{max}$. This can be found in the project repository in [/Code/Quantum-case/main_rho.cpp](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main_rho.cpp)
 
 ## 3.5 Using bisection
 
@@ -332,7 +332,7 @@ It is also worth noting that all these graphs are reproducible, except the time 
 
 ## 4.3 Jacobi v. bisection
 
-The program in [*/Code/Bisection/*](https://github.com/amundmr/Project-2/tree/master/Code/Bisection) compares the speed of the Jacobi method against finding the eigenvalues as roots of the characteristic polynomial with bisection. With $N=200$, we get these quite staggering results:
+The program in [/Code/Bisection/](https://github.com/amundmr/Project-2/tree/master/Code/Bisection) compares the speed of the Jacobi method against finding the eigenvalues as roots of the characteristic polynomial with bisection. With $N=200$, we get these quite staggering results:
 
 ```
 Time spent on bisection method: 0.140625 s
