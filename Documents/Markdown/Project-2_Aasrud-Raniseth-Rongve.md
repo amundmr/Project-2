@@ -15,13 +15,11 @@ header-includes: |
 ---
 
 # 1. Abstract
-First study a buckling beam problem  as a classical wave function problem in one dimension. Thereafter we extend the problem to quantum mechanics where electrons move in a three dimensional harmonic oscillator potential.  
-
-The problem is solved as an eigenvalue problem with three different methods; the Jacobi method, the bisection method and Armadillos eigenvalue solver. Choosing the approach with bisection due to a greater interest in the mathematics rather than the quantum physic's.
+This paper first solves a buckling beam problem as a classical wave function problem in one dimension. Thereafter we extend the problem to quantum mechanics where electrons move in a three dimensional harmonic oscillator potential. We solve these problems as an eigenvalue problem with three different methods; the Jacobi method, the bisection method and Armadillos eigenvalue solver.
 
 Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than 200 x 200, though having an increasing precision when increasing the size(seen in int-points-plot.png). The bisection is a really simple and efficient method with a set precision. On the other hand it will not find the eigenvectors. Compared to Jacobi it was found to be about 530 times faster(0.14 seconds for Bisection and 86 seconds for Jacobi) for a 200 x 200 matrix.
 
-Scaling of the equations in order to make them dimensionless is an important part of this project. One reason is to reduce numerical error(round off) when eg. adding or subtracting small numbers many times. It also makes the analyse the behaviour of the system more general.
+Scaling of the equations in order to make them dimensionless is an important part of this project. One reason is to reduce numerical error(round off) when eg. adding or subtracting small numbers many times. It also makes the behavior of the system more general.
 
 
 # 2. Introduction
