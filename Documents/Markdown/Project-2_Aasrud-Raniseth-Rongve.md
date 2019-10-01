@@ -19,7 +19,7 @@ First study a buckling beam problem  as a classical wave function problem in one
 
 The problem is solved as an eigenvalue problem with three different methods; the Jacobi method, the bisection method and Armadillos eigenvalue solver. Choosing the approach with bisection due to a greater interest in the mathematics rather than the quantum physic's.
 
-Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than 200 x 200, though having an increasing precision when increasing the size(seen in int-points-plot.png). The bisection is a really simple and efficient method with a set precision. On the other hand it will not find the eigenvectors. Compared to Jacobi it was found to be about 530 % faster(0.14 seconds for Bisection and 86 seconds for Jacobi) for a 200 x 200 matrix.
+Our algorithm for Jacobi is rather inefficient when dealing with matrices larger than 200 x 200, though having an increasing precision when increasing the size(seen in int-points-plot.png). The bisection is a really simple and efficient method with a set precision. On the other hand it will not find the eigenvectors. Compared to Jacobi it was found to be about 530 times faster(0.14 seconds for Bisection and 86 seconds for Jacobi) for a 200 x 200 matrix.
 
 <!-- TODO: Importance of scaling equations? -->
 
@@ -281,7 +281,7 @@ with the diagonal elements $d_i = \frac{2}{h^2} + V_i$ and the non-diagonal elem
 
 It is now clear that the eigenvalue solver we made will be able to find these eigenvalues. However it will have to be tweaked by finding a sufficient number of integration points, $N$ and an approximation of $\rho_{max}$ to infinity that yields eigenvalues close enough to the analytical ones of which the first four are $\lambda = 3,7,11,15$.
 
-With these eigenvalues it is possible to calculate the energy and position of the electron, but we will not demonstrate that here. We will instead investigate what number of integration points, $N$, and what approximation of infinity we can use to get sufficiently correct eigenvalues.
+With these eigenvalues it is possible to calculate the energy and position of the electron, but we will not demonstrate that here. We will instead investigate what number of integration points, $N$, and what approximation of infinity we can use to get sufficiently precise eigenvalues.
 
 To do this we fix $\rho_{max} = 10$ and find the average deviation of our calculated eigenvalues from the analytical eigenvalues, for $N = {100, 200, 300, 400}$. We thereafter plot the error and time versus the number of integration points. This can be found in the project repository in [_/Code/Quantum-case/main.cpp_](https://github.com/amundmr/Project-2/blob/master/Code/Quantum-case/main.cpp)
 
@@ -348,7 +348,7 @@ From the figures presented in the results we see that while a higher number of i
 
 With the changing of $\rho_{max}$ we see that first the error decreases, but after $\rho_{max} = 5$ we actually start to see an increase in error again. This might be because a higher $\rho_{max}$ gives a bigger step-size which again gives lower numbers on the off-diagonal elements, which in turn yields a lower amount of Jacobi rotations before the off-diagonal elements are below the tolerance for being called zero.
 
-The time spent on the calculations seem pretty random and that is probably because the changing of $\rho_{max}$ doesn't make the computer do any more or less work, it simply changes the numbers. The fluctuations might therefore just be that the computer has different background tasks running at different times.
+The time spent on the $\rho_{max}$ calculation seem pretty random and that is probably because the changing of $\rho_{max}$ doesn't make the computer do substantially more work. The fluctuations might therefore just be because the computer has different background tasks running at different times.
 
 # 6. Conclusion
 
