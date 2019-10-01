@@ -237,8 +237,8 @@ $$t = -\tau \pm \sqrt{1+\tau^2}.$$
 Then
 $$c = \frac{1}{\sqrt{1+t^2}} \quad \textrm{and} \quad s= tc$$
 
-At this point we have our sines, cosines, tangens and cotangens, but we still do not have a rotation matrix. The next step is to search our matrix $\bf A$ for the largest element and save its indices. This is done in /Code/Jacobi_method/off.cpp. \
-The next step is to use these indices to create our orthogonal transformation matrix $\bf Q$. Then we can multiply our original matrix $\bf A$ from the right with $\bf Q$ and from the left with its transposed $\bf Q^T$. This is done in /Code/Jacobi_method/Jacobi_rotate.cpp. We then repeat this process until the largest off-diagonal element is below a set tolerance.
+At this point we have our sines, cosines, tangens and cotangens, but we still do not have a rotation matrix. The next step is to search our matrix $\bf A$ for the largest element and save its indices. This is done in `/Code/Jacobi_method/off.cpp`. \
+The next step is to use these indices to create our orthogonal transformation matrix $\bf Q$. Then we can multiply our original matrix $\bf A$ from the right with $\bf Q$ and from the left with its transposed $\bf Q^T$. This is done in `/Code/Jacobi_method/Jacobi_rotate.cpp`. We then repeat this process until the largest off-diagonal element is below a set tolerance.
 
 ## 3.4 Our method applied
 
@@ -343,8 +343,13 @@ The time spent on the calculations seem pretty random and that is probably becau
 
 
 # 6. Conclusion
-##6.? Future work
 
+We found that using Jacobi's method to find eigenvalues was very doable. While the bisection is much faster, it does not give us the opportunity to find eigenvectors. \
+It is also pretty easy to modify an algorithm like this to work for many different scenarios. We demonstrated both a buckling beam and a quantum particle here, which both turned out very good.
+
+## 6.? Future work
+
+If someone were to improve upon these algorithms or apply them to even more scenarios it might be worth investigating if the bisection method is enough for the scenario or if you would actually need the Jacobi method.
 
 # Appendix
 
