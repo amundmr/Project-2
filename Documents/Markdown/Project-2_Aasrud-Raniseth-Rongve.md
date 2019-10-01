@@ -238,7 +238,7 @@ Then
 $$c = \frac{1}{\sqrt{1+t^2}} \quad \textrm{and} \quad s= tc$$
 
 At this point we have our sines, cosines, tangens and cotangens, but we still do not have a rotation matrix. The next step is to search our matrix $\bf A$ for the largest element and save its indices. This is done in `/Code/Jacobi_method/off.cpp`. \
-The next step is to use these indices to create our orthogonal transformation matrix $\bf Q$. Then we can multiply our original matrix $\bf A$ from the right with $\bf Q$ and from the left with its transposed $\bf Q^T$. This is done in `/Code/Jacobi_method/Jacobi_rotate.cpp`. We then repeat this process until the largest off-diagonal element is below a set tolerance.
+The next step is to use these indices to create our orthogonal transformation matrix $\bf Q$. Then we can multiply our original matrix $\bf A$ from the right with $\bf Q$ and from the left with its transposed $\bf Q^\dagger$. This is done in `/Code/Jacobi_method/Jacobi_rotate.cpp`. We then repeat this process until the largest off-diagonal element is below a set tolerance.
 
 ## 3.4 Our method applied
 
@@ -334,12 +334,16 @@ Even though $N=200$ is quite a realistic number of steps (maybe even a bit few, 
 
 # 5. Discussion
 
+## 5.1 Buckling beam
+
 ## 5.2 Quantum mechanics eigenvalue calculations
 From the figures (@fig:qfig1 and @fig:qfig2) presented in the results we see that while a higher number of integration points yields better results, though also rapidly increasing time.
 
 With the changing of $\rho_{max}$ we see that first the error decreases, but after $\rho_{max} = 5$ we actually start to see an increase in error again. This might be because a higher $\rho_{max}$ gives a bigger step-size which again gives lower numbers on the off-diagonal elements, which in turn yields fewer Jacobi rotations before the off-diagonal elements are below the tolerance for being called zero.
 
 The time spent on the calculations seem pretty random and that is probably because the changing of $\rho_{max}$ doesn't make the computer do any more or less work, it simply changes the numbers. The fluctuations might therefore just be that the computer has different background tasks running at different times.
+
+## 5.3 Jacobi v. bisection
 
 
 # 6. Conclusion
