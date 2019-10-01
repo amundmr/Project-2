@@ -10,9 +10,11 @@ mat init(double Rho_N, int N);                //Takes Rho_N (approx infty) and i
 mat Jacobi_method(mat A, int N);              //Takes matrix to find eigvals and N, returns vector with eigvals.
 vec arma_eig(mat A);                          //Armadillos function for finding Eigenvalues, returns vector with eigvals.
 double averageError(vec jacobi_eigenvalues);  //Calculating average error of the four first eigenvalues
-void consoleout(int N, vec arma_eigenvalues, vec jacobi_eigenvalues, double t_arma, double t_jacobi, double Rho_N);
+void consoleout(int N, vec arma_eigenvalues, vec jacobi_eigenvalues, double t_arma, double t_jacobi, double Rho_N); // Printing to console
 
 ofstream ofile;
+
+/* This program loops over different values of Rho_max to find for the best value */
 
 int main() {
   int i = 0;
@@ -65,8 +67,8 @@ int main() {
 
   return 0;
 }
-
-double averageError(vec jacobi_eigenvalues) { //Calculates the average of the error for the first four eigenvalues.
+  //Calculates the average of the error for the first four eigenvalues.
+double averageError(vec jacobi_eigenvalues) {
   vec correctAnswer = {3.0, 7.0, 11.0, 15.0};
   vec diff = abs(correctAnswer-jacobi_eigenvalues);
   double avgDiff = accu(diff) / diff.n_elem;
@@ -74,9 +76,9 @@ double averageError(vec jacobi_eigenvalues) { //Calculates the average of the er
 }
 
 
-
-void consoleout(int N, vec arma_eigenvalues, vec jacobi_eigenvalues, double t_arma, double t_jacobi, double Rho_N) {
   //Printing to console
+void consoleout(int N, vec arma_eigenvalues, vec jacobi_eigenvalues, double t_arma, double t_jacobi, double Rho_N) {
+
   cout << "Integration points, N: " << N << endl;
   cout << "Rho/infinity value used: " << Rho_N << endl;
   cout << "Eigenvalues from arma solver: " << endl;

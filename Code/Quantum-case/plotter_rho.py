@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 
+#Reading from file
 f = open(sys.argv[1],"r")
 lines=f.readlines()
 x = np.zeros(len(lines))
@@ -14,6 +15,7 @@ for line in lines:
     y1[i] = float(line.split()[2])
     i += 1
 
+#Ploting read data
 plt.figure(figsize=(6,8))
 plt.subplot(211)
 plt.scatter(x,y, label = "Average error of Eigenvalues", color = 'g')

@@ -14,6 +14,8 @@ void consoleout(int N, vec arma_eigenvalues, vec jacobi_eigenvalues, double t_ar
 
 ofstream ofile;
 
+/* This program loops over different values of N to find for the best value */
+
 int main() {
   int i = 0;
 
@@ -66,7 +68,8 @@ int main() {
   return 0;
 }
 
-double averageError(vec jacobi_eigenvalues) { //Calculates the average of the error for the first four eigenvalues.
+  //Calculates the average of the error for the first four eigenvalues.
+double averageError(vec jacobi_eigenvalues) {
   vec correctAnswer = {3.0, 7.0, 11.0, 15.0};
   vec diff = abs(correctAnswer-jacobi_eigenvalues);
   double avgDiff = accu(diff) / diff.n_elem;
@@ -74,9 +77,9 @@ double averageError(vec jacobi_eigenvalues) { //Calculates the average of the er
 }
 
 
-
-void consoleout(int N, vec arma_eigenvalues, vec jacobi_eigenvalues, double t_arma, double t_jacobi) {
   //Printing to console
+void consoleout(int N, vec arma_eigenvalues, vec jacobi_eigenvalues, double t_arma, double t_jacobi) {
+
   cout << "Integration points, N: " << N << endl;
   cout << "Eigenvalues from arma solver: " << endl;
   cout << arma_eigenvalues << endl;

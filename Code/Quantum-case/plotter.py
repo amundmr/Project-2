@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 
+#Reading file
 f = open(sys.argv[1],"r")
 lines=f.readlines()
 x = np.zeros(len(lines))
@@ -14,6 +15,8 @@ for line in lines:
     y1[i] = float(line.split()[2])
     i += 1
 
+
+#Plotting read data
 plt.figure(figsize=(6,8))
 plt.subplot(211)
 plt.scatter(x,y, label = "Average error of Eigenvalues", color = 'g')
@@ -37,28 +40,3 @@ plt.tick_params(direction='in', top = 'true', right = 'true')
 #plt.suptitle("Presicion and time increase with more integration points")
 plt.savefig("PLOT.png", bbox_inches='tight')
 plt.show()
-
-"""
-
-
-
-f = np.zeros(len(sys.argv))                     #f er vektor med lenge lik antall argumenter
-line = np.zeros_like(f)                         #line er det samme
-x = np.zeros_like(f)
-y = np.zeros_like(f)
-for file in range(1,len(sys.argv)):             # for i fra 1 til lengden av inputparameter vektoren (i over alle input parametre)
-    f[file] = open(sys.argv[file],"r")          # f[i] = les den i'te fila
-    lines[file] = f[file].readlines()           # linjene[i] blir alle linjene i f[i]
-
-    i=0                                         # Definere i= 0 før neste løkke
-    for line in lines:                          # For hver linje i den aktuelle fila
-        x[file][i] = float(line.split()[0])     # Gjør om linja til to floats der første verdi er x og andre verdi er y
-        y[file][i] = float(line.split()[1])
-        i += 1                                  # gjør klar til å lese neste linje, altså neste x og y verdi i den aktuelle fila
-        plt.plot(x[file],y[file])               # Plotter alle x og y verdiene av den aktuelle fila. label = "TDMA n=&g" % len(x[i])
-
-
-plt.legend()
-
-plt.show()
-"""
